@@ -35,8 +35,8 @@ def homepage():
 
 @ask.launch
 def start_skill():
-	welcome_message = 'Hello there, would you like the news?'
-	return qeustion(welcome_message)
+	welcome_message = 'Hello there Matt, Agam, and Marie, would you like the news?'
+	return question(welcome_message)
 
 
 @ask.intent("YesIntent")
