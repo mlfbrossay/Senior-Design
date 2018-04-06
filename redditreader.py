@@ -35,7 +35,7 @@ def homepage():
 
 @ask.launch
 def start_skill():
-	welcome_message = 'Hello there Matt, Agam, and Marie, would you like the news?'
+	welcome_message = 'Hello there Matt, Agam, Marie and Professor Aslani, would you like the news?'
 	return question(welcome_message)
 
 
