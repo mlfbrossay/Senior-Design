@@ -2,6 +2,7 @@
 
 
 6/5/18 (MT)
+
 Added an Arduino program that basically receives the data sent to the HC-05 
 module and prints it in serial monitor (can be found in the "tools" tab on
 Arduino). On the Raspberry pi I used the bluez library along with minicon with the help of this 
