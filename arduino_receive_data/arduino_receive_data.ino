@@ -17,7 +17,8 @@ void loop()
    {
       data = Serial.read();        //Read the incoming data & store into data
       Serial.print(data);          //Print Value inside data in Serial monitor
-      Serial.print("\n");        
+       if(data == '\n') 
+        Serial.print("\n");        
       if(data == '1')              // Checks whether value of data is equal to 1
          digitalWrite(13, HIGH);   //If value is 1 then LED turns ON
       else if(data == '0')         //  Checks whether value of data is equal to 0
