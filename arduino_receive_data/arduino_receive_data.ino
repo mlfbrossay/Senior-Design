@@ -23,5 +23,7 @@ void loop()
          digitalWrite(13, HIGH);   //If value is 1 then LED turns ON
       else if(data == '0')         //  Checks whether value of data is equal to 0
          digitalWrite(13, LOW);    //If value is 0 then LED turns OFF
+      Serial.write(45)
+      int bytesSent = Serial.write("Hello")
    }
 }
