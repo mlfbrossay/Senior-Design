@@ -70,7 +70,7 @@ def saveReading(temperature):
 
 print("Waiting for data...")
 temp = []
-global start = False
+start = False
 
             
 if __name__ == '__main__':
