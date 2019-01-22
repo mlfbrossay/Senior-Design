@@ -20,19 +20,19 @@ def receive_data():
             asciiOrd = ord(character)
             #If it is a start sequence and we have already started,
             #start over.
-            if (asciiOrd == 60 and start == True):
+            if (asciiOrd == 60 and startbool == True):
                 temp = []
             #If it is a start sequence and we have not started,
             #start now
-            elif (asciiOrd == 60 and start == False):
-                start = True
+            elif (asciiOrd == 60 and startbool == False):
+                startbool = True
 
             #If it is not a start or a stop, and we have started,
             #simply append.
-            elif (asciiOrd != 60 and asciiOrd !=62 and start == True):
+            elif (asciiOrd != 60 and asciiOrd !=62 and startbool == True):
                 temp.append(character.decode('ascii'))
             #If it is an end character, and we have started then we are done.
-            elif (asciiOrd == 62 and start == True):
+            elif (asciiOrd == 62 and startbool == True):
 
                 #If there is something there, and it is a proper float
                 if len(temp) > 0:
@@ -43,7 +43,7 @@ def receive_data():
                         ser.write('<5>'.encode('utf-8'))
                     except Exception as e:
                         print(e)
-                start = False
+                startbool = False
                 temp = []
 
 
@@ -66,6 +66,7 @@ def start_skill():
     t = Thread(target = receive_data)
     t.setDaemon(True)
     t.start()
+    print('yes?')
     welcome_message = 'Hello, would you like to turn your switch on or off?'
     return question(welcome_message)    #Alexa will ask the above question
 
@@ -109,7 +110,7 @@ def saveReading(temperature):
 
 print("Waiting for data...")
 temp = []
-start = False
+startbool = False
 
             
 if __name__ == '__main__':
