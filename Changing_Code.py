@@ -29,8 +29,8 @@ def homepage():
 @ask.launch		#This occurs when the user says "Alexa, launch (...)"
 def start_skill():
     t = threading.Thread(target = receive_data)
-	welcome_message = 'Hello, would you like to turn your switch on or off?'
-	return question(welcome_message)	#Alexa will ask the above question
+    welcome_message = 'Hello, would you like to turn your switch on or off?'
+    return question(welcome_message)	#Alexa will ask the above question
 
 @ask.intent("OnIntent")		#If the user says "On," this will run
 def turn_on():
