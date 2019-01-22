@@ -14,6 +14,7 @@ ask = Ask(app, "/switch")
 
 def receive_data():
     while (True):
+        print "here"
         #Read one byte at a time
         if (ser.inWaiting() > 0):
             character = ser.read()
