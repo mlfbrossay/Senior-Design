@@ -13,6 +13,7 @@ ask = Ask(app, "/switch")
 
 print('------ ', datetime.datetime.now(), ' Program started')   #Will print when program initially runs
 
+global start
 start = False
 temp = []
 print("Waiting for data...")
