@@ -13,6 +13,7 @@ ask = Ask(app, "/switch")
 print('------ ', datetime.datetime.now(), ' Program started')   #Will print when program initially runs
 
 start = False
+temp = []
 
 def switch_on():    #Turns on switch
     print('switch has turned on')
@@ -66,7 +67,7 @@ def saveReading(temperature):
         file.write(newReading.encode('utf-8'))
 
 print("Waiting for data...")
-temp = []
+#temp = []
             
 if __name__ == '__main__':
     app.run(debug = True)
