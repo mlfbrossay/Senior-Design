@@ -14,6 +14,7 @@ print('------ ', datetime.datetime.now(), ' Program started')   #Will print when
 
 start = False
 temp = []
+print("Waiting for data...")
 
 def switch_on():    #Turns on switch
     print('switch has turned on')
@@ -66,7 +67,7 @@ def saveReading(temperature):
     with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
         file.write(newReading.encode('utf-8'))
 
-print("Waiting for data...")
+#print("Waiting for data...")
 #temp = []
             
 if __name__ == '__main__':
