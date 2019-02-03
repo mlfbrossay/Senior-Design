@@ -12,8 +12,6 @@ ask = Ask(app, "/switch")
 
 print('------ ', datetime.datetime.now(), ' Program started')   #Will print when program initially runs
 
-print("Waiting for data...")
-temp = []
 start = False
 
 def switch_on():    #Turns on switch
@@ -67,6 +65,8 @@ def saveReading(temperature):
     with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
         file.write(newReading.encode('utf-8'))
 
+print("Waiting for data...")
+temp = []
             
 if __name__ == '__main__':
     app.run(debug = True)
