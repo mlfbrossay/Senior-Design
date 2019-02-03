@@ -72,7 +72,7 @@ if __name__ == '__main__':
     
 
 while (True):
-	print("is it hitting this") 
+    print("is it hitting this") 
     #Read one byte at a time
     if (ser.inWaiting() > 0):
         character = ser.read()
