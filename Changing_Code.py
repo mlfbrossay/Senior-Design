@@ -108,5 +108,6 @@ if __name__ == '__main__':
     app.run(debug = True)
     thread = Thread(target = readFrom)
     thread.start()
-    
+    print("is it getting here")
+
     
