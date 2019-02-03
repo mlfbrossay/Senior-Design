@@ -12,10 +12,6 @@ ask = Ask(app, "/switch")
 
 print('------ ', datetime.datetime.now(), ' Program started')   #Will print when program initially runs
 
-print("Waiting for data...")
-temp = []
-start = False
-
 def switch_on():    #Turns on switch
     print('switch has turned on')
     ser.write('<1>'.encode('utf-8'))
@@ -24,9 +20,9 @@ def switch_off():   #Turns off switch
     print('switch has turned off')
     ser.write('<0>'.encode('utf-8'))
 
-@app.route('/')
-def homepage():
-    return "Hi"
+#@app.route('/')
+#def homepage():
+#    return "Hi"
 
 @ask.launch     #This occurs when the user says "Alexa, launch (...)"
 def start_skill():
@@ -70,9 +66,15 @@ def saveReading(temperature):
     print('Saving new reading: ' + newReading)
     with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
         file.write(newReading.encode('utf-8'))
-        
+
+print("Waiting for data...")
+temp = []
+start = False
+
+            
 if __name__ == '__main__':
     app.run(debug = True)
+    
 
 while (True):
     #Read one byte at a time
