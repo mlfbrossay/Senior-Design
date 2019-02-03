@@ -66,15 +66,13 @@ def saveReading(temperature):
     print('Saving new reading: ' + newReading)
     with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
         file.write(newReading.encode('utf-8'))
-
-#print("Waiting for data...")
-#temp = []
             
 if __name__ == '__main__':
     app.run(debug = True)
     
 
 while (True):
+	print("is it hitting this") 
     #Read one byte at a time
     if (ser.inWaiting() > 0):
         character = ser.read()
