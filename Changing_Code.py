@@ -51,7 +51,11 @@ def readFrom():
 	            start = False
 	            temp = []
 
-
+if __name__ == '__main__':
+    app.run(debug = True)
+    thread = Thread(target = readFrom)
+    thread.start()
+    print("is it getting here")
 
 def switch_on():    #Turns on switch
     print('switch has turned on')
@@ -103,11 +107,4 @@ def saveReading(temperature):
     print('Saving new reading: ' + newReading)
     with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
         file.write(newReading.encode('utf-8'))
-            
-if __name__ == '__main__':
-    app.run(debug = True)
-    thread = Thread(target = readFrom)
-    thread.start()
-    print("is it getting here")
-
     
