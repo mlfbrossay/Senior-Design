@@ -59,13 +59,13 @@ def regular():
 	    return statement(off_text)  #Alexa says the above statement
 	######### NEW ##########
 
-	def saveReading(temperature):
-	    newReading = time.strftime("%Y-%m-%d %H:%M:%S") + \
-	                 ',' + str(temperature) + '\n'
-	    
-	    print('Saving new reading: ' + newReading)
-	    with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
-	        file.write(newReading.encode('utf-8'))
+def saveReading(temperature):
+    newReading = time.strftime("%Y-%m-%d %H:%M:%S") + \
+                 ',' + str(temperature) + '\n'
+    
+    print('Saving new reading: ' + newReading)
+    with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
+        file.write(newReading.encode('utf-8'))
 
 def readFrom():
 	start = False
