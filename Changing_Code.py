@@ -101,7 +101,7 @@ def readFrom():
 	            temp = []	        
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    #app.run(debug = True)
     print("is it getting here")
     t1 = Thread(target = readFrom, args = [])
     print("what about here")
