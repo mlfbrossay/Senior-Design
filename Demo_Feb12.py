@@ -111,6 +111,7 @@ def readFrom():
 	            temp = []	        
 
 if __name__ == '__main__':
+    global power
     t1 = Thread(target = readFrom, args = [])
     t1.start()
     app.run(debug=True)
