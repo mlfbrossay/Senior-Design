@@ -64,6 +64,7 @@ def reportPower():
     return statement(power_text)  #Alexa says the above statement
 
 def saveReading(temperature):
+	global power
     power = str(temperature)
     newReading = time.strftime("%Y-%m-%d %H:%M:%S") + \
                  ',' + power + '\n'
