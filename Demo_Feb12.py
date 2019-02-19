@@ -6,7 +6,7 @@ from flask_ask import Ask, statement, question, session
 import datetime
 from threading import Thread
 
-power = '0.1'
+#power = '0.1'
 
 ser = serial.Serial('/dev/rfcomm0', 9600)
 
@@ -111,7 +111,6 @@ def readFrom():
 	            temp = []	        
 
 if __name__ == '__main__':
-    global power
     t1 = Thread(target = readFrom, args = [])
     t1.start()
     app.run(debug=True)
