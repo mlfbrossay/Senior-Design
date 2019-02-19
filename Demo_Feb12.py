@@ -73,6 +73,7 @@ def saveReading(temperature):
         file.write(newReading.encode('utf-8'))
 
 def readFrom():
+    global power
 	start = False
 	temp = []
 	time.sleep(5)
