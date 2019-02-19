@@ -6,9 +6,6 @@ from flask_ask import Ask, statement, question, session
 import datetime
 from threading import Thread
 
-
-power = '0.1'
-
 ser = serial.Serial('/dev/rfcomm0', 9600)
 
 app = Flask(__name__)
@@ -61,7 +58,7 @@ def turn_off_from_launch():
 
 @ask.intent("AskPowerIntent")    #If the user says "Off," this will run
 def reportPower():
-    power_text = 'Your current power usage is ' + power + 'watts'
+    power_text = 'Your current power usage is ' + power + ' watts'
     return statement(power_text)  #Alexa says the above statement
 
 def saveReading(temperature):
@@ -73,6 +70,7 @@ def saveReading(temperature):
         file.write(newReading.encode('utf-8'))
 
 def readFrom():
+	global power = '0.1'
 	start = False
 	temp = []
 	time.sleep(5)
