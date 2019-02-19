@@ -6,7 +6,7 @@ from flask_ask import Ask, statement, question, session
 import datetime
 from threading import Thread
 
-power = '0.0'
+power
 
 ser = serial.Serial('/dev/rfcomm0', 9600)
 
