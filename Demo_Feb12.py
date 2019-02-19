@@ -70,7 +70,6 @@ def saveReading(temperature):
     print('Saving new reading: ' + newReading)
     with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
         file.write(newReading.encode('utf-8'))
-    return power
 
 
 def readFrom():
@@ -103,7 +102,8 @@ def readFrom():
 	            if len(temp) > 0:
 	                try:
 	                    converted = float(''.join(temp))
-	                    power = saveReading(converted)
+	                    power = str(converted)
+	                    saveReading(converted)
 	                    #Acknowledge receipt of data
 	                    ser.write('<5>'.encode('utf-8'))
 	                except Exception as e:
