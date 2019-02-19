@@ -7,7 +7,7 @@ import datetime
 from threading import Thread
 
 
-power = '0.0'
+power = '0.1'
 
 ser = serial.Serial('/dev/rfcomm0', 9600)
 
