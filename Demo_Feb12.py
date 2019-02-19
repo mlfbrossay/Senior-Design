@@ -6,7 +6,7 @@ from flask_ask import Ask, statement, question, session
 import datetime
 from threading import Thread
 
-power
+power = '0.0'
 
 ser = serial.Serial('/dev/rfcomm0', 9600)
 
@@ -64,17 +64,16 @@ def reportPower():
     return statement(power_text)  #Alexa says the above statement
 
 def saveReading(temperature):
+	global power
     power = str(temperature)
     newReading = time.strftime("%Y-%m-%d %H:%M:%S") + \
                  ',' + power + '\n'
     print('Saving new reading: ' + newReading)
     with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
         file.write(newReading.encode('utf-8'))
-    return power
 
 
 def readFrom():
-	global power
 	start = False
 	temp = []
 	time.sleep(5)
@@ -103,7 +102,7 @@ def readFrom():
 	            if len(temp) > 0:
 	                try:
 	                    converted = float(''.join(temp))
-	                    power = saveReading(converted)
+	                    saveReading(converted)
 	                    #Acknowledge receipt of data
 	                    ser.write('<5>'.encode('utf-8'))
 	                except Exception as e:
