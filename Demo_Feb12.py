@@ -76,7 +76,7 @@ def readFrom():
 	global power
 	start = False
 	temp = []
-	time.sleep(5)
+	#time.sleep(5)
 	while (True):
 	    #Read one byte at a time
 	    if (ser.inWaiting() > 0):
