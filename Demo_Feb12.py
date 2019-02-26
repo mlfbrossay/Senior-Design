@@ -24,6 +24,8 @@ print("Waiting for data...")
 class Receiving(Thread):
 
 	def __init__(self,q):
+		print("here")
+		app.run(debug=True)
 		self.q = q
 
 	def switch_on():    #Turns on switch
@@ -130,5 +132,5 @@ if __name__ == '__main__':
     t2 = Thread(target = Receiving, args = (q,))
     t1.start()
     t2.start()
-    app.run(debug=True)
+    #app.run(debug=True)
 	    
