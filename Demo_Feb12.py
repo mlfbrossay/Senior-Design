@@ -23,7 +23,7 @@ print("Waiting for data...")
 
 class Receiving(Thread):
 
-	def __init__(q):
+	def __init__(self,q):
 		self.q = q
 
 	def switch_on():    #Turns on switch
@@ -86,7 +86,7 @@ def saveReading(temperature, q):
         file.write(newReading.encode('utf-8'))
 
 
-def readFrom()
+def readFrom(q):
 	global power
 	start = False
 	temp = []
@@ -127,7 +127,7 @@ def readFrom()
 
 if __name__ == '__main__':
     t1 = Thread(target = readFrom, args = (q,))
-    t2 = Thread(target = receiving, args = (q,))
+    t2 = Thread(target = Receiving, args = (q,))
     t1.start()
     t2.start()
     app.run(debug=True)
