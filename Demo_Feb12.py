@@ -5,10 +5,10 @@ from flask import Flask
 from flask_ask import Ask, statement, question, session
 import datetime
 from threading import Thread
-import Queue
+import queue
 
 
-q = Queue.Queue();
+q = queue.Queue();
 power = '0.0'
 q.put(power)
 
@@ -64,9 +64,9 @@ def turn_off_from_launch():
 
 @ask.intent("AskPowerIntent")    #If the user says "Off," this will run
 def reportPower():
-	temp = q.get()
+    temp = q.get()
     power_text = 'Your current power usage is ' + temp + ' watts'
-    g.put(temp)
+    q.put(temp)
     print(power)
     return statement(power_text)  #Alexa says the above statement
 
@@ -110,9 +110,9 @@ def readFrom(q):
 	            #If there is something there, and it is a proper float
 	            if len(temp) > 0:
 	                try:
-	                    converted = float(''.join(temp, q))
+	                    converted = float(''.join(temp))
 	                    power = str(converted)
-	                    saveReading(converted)
+	                    saveReading(converted, q)
 	                    #Acknowledge receipt of data
 	                    ser.write('<5>'.encode('utf-8'))
 	                except Exception as e:
@@ -121,7 +121,7 @@ def readFrom(q):
 	            temp = []	        
 
 if __name__ == '__main__':
-    t1 = Thread(target = readFrom, args = q)
+    t1 = Thread(target = readFrom, args = (q,))
     t1.start()
     app.run(debug=True)
 	    
