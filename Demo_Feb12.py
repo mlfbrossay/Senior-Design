@@ -5,8 +5,12 @@ from flask import Flask
 from flask_ask import Ask, statement, question, session
 import datetime
 from threading import Thread
+import Queue
 
+
+q = Queue.Queue();
 power = '0.0'
+q.put(power)
 
 ser = serial.Serial('/dev/rfcomm0', 9600)
 
@@ -60,12 +64,16 @@ def turn_off_from_launch():
 
 @ask.intent("AskPowerIntent")    #If the user says "Off," this will run
 def reportPower():
-    power_text = 'Your current power usage is ' + power + ' watts'
+	temp = q.get()
+    power_text = 'Your current power usage is ' + temp + ' watts'
+    g.put(temp)
     print(power)
     return statement(power_text)  #Alexa says the above statement
 
-def saveReading(temperature):
+def saveReading(temperature, q):
     power = str(temperature)
+    q.get()
+    q.put(power)
     newReading = time.strftime("%Y-%m-%d %H:%M:%S") + \
                  ',' + power + '\n'
     print('Saving new reading: ' + newReading)
@@ -73,7 +81,7 @@ def saveReading(temperature):
         file.write(newReading.encode('utf-8'))
 
 
-def readFrom():
+def readFrom(q):
 	global power
 	start = False
 	temp = []
@@ -102,7 +110,7 @@ def readFrom():
 	            #If there is something there, and it is a proper float
 	            if len(temp) > 0:
 	                try:
-	                    converted = float(''.join(temp))
+	                    converted = float(''.join(temp, q))
 	                    power = str(converted)
 	                    saveReading(converted)
 	                    #Acknowledge receipt of data
@@ -113,7 +121,7 @@ def readFrom():
 	            temp = []	        
 
 if __name__ == '__main__':
-    t1 = Thread(target = readFrom, args = [])
+    t1 = Thread(target = readFrom, args = q)
     t1.start()
     app.run(debug=True)
 	    
