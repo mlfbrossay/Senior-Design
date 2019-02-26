@@ -61,6 +61,7 @@ def turn_off_from_launch():
 @ask.intent("AskPowerIntent")    #If the user says "Off," this will run
 def reportPower():
     power_text = 'Your current power usage is ' + power + ' watts'
+    print(power)
     return statement(power_text)  #Alexa says the above statement
 
 def saveReading(temperature):
