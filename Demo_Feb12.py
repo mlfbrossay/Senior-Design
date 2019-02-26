@@ -21,7 +21,11 @@ print('------ ', datetime.datetime.now(), ' Program started')   #Will print when
 
 print("Waiting for data...")
 
-def receiving():
+class Receiving(Thread):
+
+	def __init__(q):
+		self.q = q
+
 	def switch_on():    #Turns on switch
 	    print('switch has turned on')
 	    ser.write('<1>'.encode('utf-8'))
@@ -82,7 +86,7 @@ def saveReading(temperature, q):
         file.write(newReading.encode('utf-8'))
 
 
-def readFrom(q):
+def readFrom()
 	global power
 	start = False
 	temp = []
