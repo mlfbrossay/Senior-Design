@@ -67,7 +67,7 @@ def reportPower():
     temp = q.get()
     power_text = 'Your current power usage is ' + temp + ' watts'
     q.put(temp)
-    print(power)
+    print(temp)
     return statement(power_text)  #Alexa says the above statement
 
 def saveReading(temperature, q):
