@@ -9,7 +9,7 @@ import queue
 
 
 q = queue.Queue()
-q.put('0.0')
+q.put("0.0")
 
 ser = serial.Serial('/dev/rfcomm0', 9600)
 
@@ -64,7 +64,7 @@ def turn_off_from_launch():
 @ask.intent("AskPowerIntent")    #If the user says "Off," this will run
 def reportPower():
     temp = q.get()
-    power_text = 'Your current power usage is ' + temp + ' watts'
+    power_text = "Your current power usage is " + temp + " watts"
     q.put(temp)
     print(temp)
     return statement(power_text)  #Alexa says the above statement
