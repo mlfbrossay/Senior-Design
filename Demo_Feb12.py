@@ -7,7 +7,6 @@ import datetime
 from threading import Thread
 import queue
 
-
 q = queue.Queue()
 q.put("0.0")
 
