@@ -84,6 +84,7 @@ def readFrom(q):
 	temp = []
 	ser.flush()
 	#time.sleep(5)
+	print("is this happening more than once")
 	while (True):
 	    #Read one byte at a time
 	    if (ser.inWaiting() > 0):
