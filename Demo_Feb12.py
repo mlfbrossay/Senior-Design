@@ -82,7 +82,6 @@ def saveReading(temperature, q):
 
 
 def readFrom(q):
-	global power
 	start = False
 	temp = []
 	#time.sleep(5)
