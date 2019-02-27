@@ -120,7 +120,8 @@ def readFrom(q):
 	            temp = []	        
 
 if __name__ == '__main__':
+    app.run(debug=False)
     t1 = Thread(target = readFrom, args = (q,))
     t1.start()
-    app.run(debug=True)
+    #app.run(debug=True)
 	    
