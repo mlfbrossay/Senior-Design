@@ -8,9 +8,8 @@ from threading import Thread
 import queue
 
 
-q = queue.Queue();
-power = '0.0'
-q.put(power)
+q = queue.Queue()
+q.put('0.0')
 
 ser = serial.Serial('/dev/rfcomm0', 9600)
 
