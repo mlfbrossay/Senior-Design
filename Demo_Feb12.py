@@ -123,5 +123,5 @@ def readFrom(q):
 if __name__ == '__main__':
     t1 = Thread(target = readFrom, args = (q,))
     t1.start()
-    #app.run(debug=True)
+    app.run(debug=True)
 	    
