@@ -21,61 +21,54 @@ print('------ ', datetime.datetime.now(), ' Program started')   #Will print when
 
 print("Waiting for data...")
 
-class Receiving(Thread):
+def switch_on():    #Turns on switch
+    print('switch has turned on')
+    ser.write('<1>'.encode('utf-8'))
 
-	def __init__(self,q):
-		print("here")
-		app.run(debug=True)
-		self.q = q
+def switch_off():   #Turns off switch
+    print('switch has turned off')
+    ser.write('<0>'.encode('utf-8'))
 
-	def switch_on():    #Turns on switch
-	    print('switch has turned on')
-	    ser.write('<1>'.encode('utf-8'))
+@ask.launch     #This occurs when the user says "Alexa, launch (...)"
+def start_skill():
+    welcome_message = 'Hello, would you like to turn your switch on or off?'
+    return question(welcome_message)    #Alexa will ask the above question
 
-	def switch_off():   #Turns off switch
-	    print('switch has turned off')
-	    ser.write('<0>'.encode('utf-8'))
+@ask.intent("OnIntent")     #If the user says "On," this will run
+def turn_on():
+    switch_on()             #Function called to turn on switch
+    print(datetime.datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
+    on_text = "Okay, I've turned it on"
+    return statement(on_text)   #Alexa says the above statement
 
-	@ask.launch     #This occurs when the user says "Alexa, launch (...)"
-	def start_skill():
-	    welcome_message = 'Hello, would you like to turn your switch on or off?'
-	    return question(welcome_message)    #Alexa will ask the above question
+@ask.intent("OffIntent")    #If the user says "Off," this will run
+def turn_off():
+    switch_off()            #function called to turn off switch
+    print(datetime.datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
+    off_text = "Okay, I've turned it off"
+    return statement(off_text)  #Alexa says the above statement
 
-	@ask.intent("OnIntent")     #If the user says "On," this will run
-	def turn_on():
-	    switch_on()             #Function called to turn on switch
-	    print(datetime.datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
-	    on_text = "Okay, I've turned it on"
-	    return statement(on_text)   #Alexa says the above statement
+@ask.intent("OnFromLaunchIntent")    #If the user says "Off," this will run
+def turn_on_from_launch():
+    switch_on()            #function called to turn off switch
+    print(datetime.datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
+    on_text = "Okay, I've turned it on"
+    return statement(on_text)  #Alexa says the above statement
 
-	@ask.intent("OffIntent")    #If the user says "Off," this will run
-	def turn_off():
-	    switch_off()            #function called to turn off switch
-	    print(datetime.datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
-	    off_text = "Okay, I've turned it off"
-	    return statement(off_text)  #Alexa says the above statement
+@ask.intent("OffFromLaunchIntent")    #If the user says "Off," this will run
+def turn_off_from_launch():
+    switch_off()            #function called to turn off switch
+    print(datetime.datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
+    off_text = "Okay, I've turned it off"
+    return statement(off_text)  #Alexa says the above statement
 
-	@ask.intent("OnFromLaunchIntent")    #If the user says "Off," this will run
-	def turn_on_from_launch():
-	    switch_on()            #function called to turn off switch
-	    print(datetime.datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
-	    on_text = "Okay, I've turned it on"
-	    return statement(on_text)  #Alexa says the above statement
-
-	@ask.intent("OffFromLaunchIntent")    #If the user says "Off," this will run
-	def turn_off_from_launch():
-	    switch_off()            #function called to turn off switch
-	    print(datetime.datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
-	    off_text = "Okay, I've turned it off"
-	    return statement(off_text)  #Alexa says the above statement
-
-	@ask.intent("AskPowerIntent")    #If the user says "Off," this will run
-	def reportPower():
-	    temp = q.get()
-	    power_text = 'Your current power usage is ' + temp + ' watts'
-	    q.put(temp)
-	    print(temp)
-	    return statement(power_text)  #Alexa says the above statement
+@ask.intent("AskPowerIntent")    #If the user says "Off," this will run
+def reportPower():
+    temp = q.get()
+    power_text = 'Your current power usage is ' + temp + ' watts'
+    q.put(temp)
+    print(temp)
+    return statement(power_text)  #Alexa says the above statement
 
 def saveReading(temperature, q):
     power = str(temperature)
@@ -129,8 +122,6 @@ def readFrom(q):
 
 if __name__ == '__main__':
     t1 = Thread(target = readFrom, args = (q,))
-    t2 = Thread(target = Receiving, args = (q,))
     t1.start()
-    t2.start()
     #app.run(debug=True)
 	    
