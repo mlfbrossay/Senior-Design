@@ -70,7 +70,7 @@ def reportPower():
 def saveReading(temperature):
         with lock:
             power = str(temperature)
-        newReading = time.strftime("%Y-%m-%d %H:%M:%S") + ',' + power + '\n'
+            newReading = time.strftime("%Y-%m-%d %H:%M:%S") + ',' + power + '\n'
     
     print('Saving new reading: ' + newReading)
     with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
