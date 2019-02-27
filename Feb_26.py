@@ -115,7 +115,7 @@ def readFrom():
 	            temp = []	        
 
 if __name__ == '__main__':
-	lock = threading.Lock()
+    lock = threading.Lock()
     t1 = Thread(target = readFrom, args = [])
     t1.start()
     app.run(debug=True)
