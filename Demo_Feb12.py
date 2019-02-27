@@ -82,6 +82,7 @@ def saveReading(temperature, q):
 def readFrom(q):
 	start = False
 	temp = []
+	ser.flush()
 	#time.sleep(5)
 	while (True):
 	    #Read one byte at a time
