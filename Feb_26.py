@@ -62,16 +62,15 @@ def turn_off_from_launch():
 
 @ask.intent("AskPowerIntent")    #If the user says "Off," this will run
 def reportPower():
-	with lock:
+    with lock:
     	power_text = 'Your current power usage is ' + power + ' watts'
     	print(power)
     return statement(power_text)  #Alexa says the above statement
 
 def saveReading(temperature):
-	with lock:
-		power = str(temperature)
-    	newReading = time.strftime("%Y-%m-%d %H:%M:%S") + \
-                 ',' + power + '\n'
+        with lock:
+            power = str(temperature)
+        newReading = time.strftime("%Y-%m-%d %H:%M:%S") + ',' + power + '\n'
     
     print('Saving new reading: ' + newReading)
     with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
