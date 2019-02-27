@@ -82,7 +82,7 @@ def saveReading(temperature, q):
 def readFrom(q):
 	start = False
 	temp = []
-	ser.flush()
+	ser.flushInput()
 	#time.sleep(5)
 	print("is this happening more than once")
 	while (True):
