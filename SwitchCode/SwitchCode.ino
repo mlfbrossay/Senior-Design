@@ -4,7 +4,7 @@
 
 Adafruit_ADS1115 ads; //(0x48);
 
-SoftwareSerial btSerial(10, 11); // RX, TX
+SoftwareSerial btSerial(14, 16); // RX, TX
 
 const int senderPin = 7; //Tells us we are sending over Serial
 const int receiverPin = 8; //Tells us we are receiving confirmation over Serial
@@ -33,6 +33,9 @@ void setup() {
   btSerial.flush();
   Serial.flush();
   delay(50);
+  digitalWrite(7, HIGH);
+  delay(50);
+  digitalWrite(7, LOW);
 }
 
 void printMeasure(String prefix, float value, String postfix)
