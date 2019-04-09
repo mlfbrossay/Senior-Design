@@ -134,7 +134,7 @@ def readFrom(q):
 
             while(ser.inWaiting() == 0):
                 pass
-            time.sleep()
+            time.sleep(0.001)
             while (ser.inWaiting() > 0):
                 character = ser.read()
                 asciiOrd = ord(character)
@@ -176,6 +176,7 @@ def readFrom(q):
 
             while(ser.inWaiting() == 0):
                 pass
+            time.sleep(0.001)
             while (ser.inWaiting() > 0):
                 character = ser.read()
                 asciiOrd = ord(character)
