@@ -172,6 +172,9 @@ def readFrom(q):
     temp = []
     ser.flushInput()
     while (True):
+        ino1 = [0,0,0,0,0,0,0,0,0,0,0,0]
+        ino2 = [0,0,0,0,0,0,0,0,0,0,0,0]
+        ino3 = [0,0,0,0,0,0,0,0,0,0,0,0]
 
         for i in range(12):
             #REMIND: send signal ready for 1
