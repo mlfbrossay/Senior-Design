@@ -47,27 +47,27 @@ print("Waiting for data...")
 # Sends the switch number, then a '-', then a '1' for high or a '0' for low
 def switch1_on():    #Turns on switch
     print('switch 1 has turned on')
-    ser.write('<1-1>'.encode('utf-8'))
+    ser1.write('<1-1>'.encode('utf-8'))
 
 def switch1_off():   #Turns off switch
     print('switch 1 has turned off')
-    ser.write('<1-0>'.encode('utf-8'))
+    ser1.write('<1-0>'.encode('utf-8'))
 
 def switch2_on():    #Turns on switch
     print('switch 2 has turned on')
-    ser.write('<2-1>'.encode('utf-8'))
+    ser2.write('<2-1>'.encode('utf-8'))
 
 def switch2_off():   #Turns off switch
     print('switch 2 has turned off')
-    ser.write('<2-0>'.encode('utf-8'))
+    ser2.write('<2-0>'.encode('utf-8'))
 
 def switch3_on():    #Turns on switch
     print('switch 3 has turned on')
-    ser.write('<3-1>'.encode('utf-8'))
+    ser2.write('<3-1>'.encode('utf-8'))
 
 def switch3_off():   #Turns off switch
     print('switch 3 has turned off')
-    ser.write('<3-0>'.encode('utf-8'))
+    ser2.write('<3-0>'.encode('utf-8'))
 
 
 # Added intents for all 3 switches
@@ -225,17 +225,18 @@ def saveReading(temp, q):
 def readFrom(q):
     start = False
     temp = []
-    ser.flushInput()
+    ser1.flushInput()
+    ser2.flushInput()
     while (True):
 
         for i in range(12):
             #REMIND: send signal ready for 1
-            ser.write('<1-2>'.encode('utf-8')) #to be updated
+            ser1.write('<1-2>'.encode('utf-8')) #to be updated
 
             #Read one byte at a time
             while(True):
-                if(ser.inWaiting() > 0):
-                    character = ser.read()
+                if(ser1.inWaiting() > 0):
+                    character = ser1.read()
                     asciiOrd = ord(character)
                     #If it is a start sequence and we have already started,
                     #start over.
@@ -261,7 +262,7 @@ def readFrom(q):
                                 power = str(converted)
                                 saveReading(converted, q)
                                 #Acknowledge receipt of data
-                                ser.write('<5>'.encode('utf-8'))
+                                ser1.write('<5>'.encode('utf-8'))
                             except Exception as e:
                                 print(e)
                         start = False
@@ -269,11 +270,11 @@ def readFrom(q):
                         break
 
             #REMIND: send signal ready for 2
-            ser.write('<2-2>'.encode('utf-8')) #to be updated
+            ser2.write('<2-2>'.encode('utf-8')) #to be updated
 
             while(True):
-                if(ser.inWaiting() > 0):
-                    character = ser.read()
+                if(ser2.inWaiting() > 0):
+                    character = ser2.read()
                     asciiOrd = ord(character)
                     #If it is a start sequence and we have already started,
                     #start over.
@@ -299,7 +300,7 @@ def readFrom(q):
                                 power = str(converted)
                                 saveReading(converted, q)
                                 #Acknowledge receipt of data
-                                ser.write('<5>'.encode('utf-8'))
+                                ser2.write('<5>'.encode('utf-8'))
                             except Exception as e:
                                 print(e)
                         start = False
@@ -309,11 +310,11 @@ def readFrom(q):
 
 
             #REMIND: send signal ready for 3
-            ser.write('<3-2>'.encode('utf-8')) #to be updated
+            ser2.write('<3-2>'.encode('utf-8')) #to be updated
 
             while(True):
-                if(ser.inWaiting() > 0):
-                    character = ser.read()
+                if(ser2.inWaiting() > 0):
+                    character = ser2.read()
                     asciiOrd = ord(character)
                     #If it is a start sequence and we have already started,
                     #start over.
@@ -339,7 +340,7 @@ def readFrom(q):
                                 power = str(converted)
                                 saveReading(converted, q)
                                 #Acknowledge receipt of data
-                                ser.write('<5>'.encode('utf-8'))
+                                ser2.write('<5>'.encode('utf-8'))
                             except Exception as e:
                                 print(e)
                         start = False
