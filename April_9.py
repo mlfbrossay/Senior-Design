@@ -358,7 +358,7 @@ def readFrom(q):
         now = datetime.now()
         formatted_date = now.strftime('%Y-%m-%d %H:%M:%S')
 
-        cur.execute("INSERT INTO plug1 (collection_time,power_data) VALUES (%s,%s)", (formatted_date, switch1))
+        #cur.execute("INSERT INTO plug1 (collection_time,power_data) VALUES (%s,%s)", (formatted_date, switch1))
         cur.execute("INSERT INTO plug2 (collection_time,power_data) VALUES (%s,%s)", (formatted_date, switch2))
         cur.execute("INSERT INTO plug3 (collection_time,power_data) VALUES (%s,%s)", (formatted_date, switch3))
 
