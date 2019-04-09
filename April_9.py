@@ -7,6 +7,7 @@ from datetime import datetime
 from threading import Thread
 import queue
 import MySQLdb
+import random
 
 cnx= {'host': 'ammdb.clhkk5qyeyu2.us-east-1.rds.amazonaws.com',
   'username': 'amm',
@@ -264,8 +265,6 @@ def readFrom(q):
                         temp = []
                         break
 
-            print(ino1)
-
             #REMIND: send signal ready for 2
             #ser.write('<2-2>'.encode('utf-8')) #to be updated
 
@@ -304,7 +303,6 @@ def readFrom(q):
                         temp = []
                         break
 
-            print(ino2)
 
 
             #REMIND: send signal ready for 3
@@ -345,22 +343,15 @@ def readFrom(q):
                         temp = []
                         break
 
-            print(ino3)
 
-
-        #temp
-        switch1 = random.random()*100
-        switch2 = random.random()*50
-        switch3 = random.random()*25
-
-        #print(ino1)
-        #switch1 = sum(ino1)/len(ino1)
+        print(ino1)
+        switch1 = sum(ino1)/len(ino1)
         print(switch1)
-        #print(ino2)
-        #switch2 = float(sum(ino2)/len(ino2))
+        print(ino2)
+        switch2 = float(sum(ino2)/len(ino2))
         print(switch2)
-        #print(ino3)
-        #switch3 = float(sum(ino3)/len(ino3))
+        print(ino3)
+        switch3 = float(sum(ino3)/len(ino3))
         print(switch3)
 
 
