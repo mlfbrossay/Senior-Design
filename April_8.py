@@ -91,82 +91,80 @@ def readFrom(q):
             #ser.write('<1>'.encode('utf-8')) #to be updated
 
             #Read one byte at a time
-            while(ser.inWaiting() == 0):
-                pass
-            time.sleep(0.001)
-            while (ser.inWaiting() > 0):
-                character = ser.read()
-                asciiOrd = ord(character)
-                #If it is a start sequence and we have already started,
-                #start over.
-                if (asciiOrd == 60 and start == True):
-                    temp = []
-                #If it is a start sequence and we have not started,
-                #start now
-                elif (asciiOrd == 60 and start == False):
-                    start = True
+            while(True):
+                if(ser.inWaiting() > 0):
+                    character = ser.read()
+                    asciiOrd = ord(character)
+                    #If it is a start sequence and we have already started,
+                    #start over.
+                    if (asciiOrd == 60 and start == True):
+                        temp = []
+                    #If it is a start sequence and we have not started,
+                    #start now
+                    elif (asciiOrd == 60 and start == False):
+                        start = True
 
-                #If it is not a start or a stop, and we have started,
-                #simply append.
-                elif (asciiOrd != 60 and asciiOrd !=62 and start == True):
-                    temp.append(character.decode('ascii'))
-                #If it is an end character, and we have started then we are done.
-                elif (asciiOrd == 62 and start == True):
+                    #If it is not a start or a stop, and we have started,
+                    #simply append.
+                    elif (asciiOrd != 60 and asciiOrd !=62 and start == True):
+                        temp.append(character.decode('ascii'))
+                    #If it is an end character, and we have started then we are done.
+                    elif (asciiOrd == 62 and start == True):
 
-                    #If there is something there, and it is a proper float
-                    if len(temp) > 0:
-                        try:
-                            converted = float(''.join(temp))
-                            ino1[i] = converted;
-                            power = str(converted)
-                            saveReading(converted, q)
-                            #Acknowledge receipt of data
-                            ser.write('<5>'.encode('utf-8'))
-                        except Exception as e:
-                            print(e)
-                    start = False
-                    temp = []
+                        #If there is something there, and it is a proper float
+                        if len(temp) > 0:
+                            try:
+                                converted = float(''.join(temp))
+                                ino1[i] = converted;
+                                power = str(converted)
+                                saveReading(converted, q)
+                                #Acknowledge receipt of data
+                                ser.write('<5>'.encode('utf-8'))
+                            except Exception as e:
+                                print(e)
+                        start = False
+                        temp = []
+                        break
 
             print(ino1)
 
             #REMIND: send signal ready for 2
             #ser.write('<2>'.encode('utf-8')) #to be updated
 
-            while(ser.inWaiting() == 0):
-                pass
-            time.sleep(0.001)
-            while (ser.inWaiting() > 0):
-                character = ser.read()
-                asciiOrd = ord(character)
-                #If it is a start sequence and we have already started,
-                #start over.
-                if (asciiOrd == 60 and start == True):
-                    temp = []
-                #If it is a start sequence and we have not started,
-                #start now
-                elif (asciiOrd == 60 and start == False):
-                    start = True
+            while(True):
+                if(ser.inWaiting() > 0):
+                    character = ser.read()
+                    asciiOrd = ord(character)
+                    #If it is a start sequence and we have already started,
+                    #start over.
+                    if (asciiOrd == 60 and start == True):
+                        temp = []
+                    #If it is a start sequence and we have not started,
+                    #start now
+                    elif (asciiOrd == 60 and start == False):
+                        start = True
 
-                #If it is not a start or a stop, and we have started,
-                #simply append.
-                elif (asciiOrd != 60 and asciiOrd !=62 and start == True):
-                    temp.append(character.decode('ascii'))
-                #If it is an end character, and we have started then we are done.
-                elif (asciiOrd == 62 and start == True):
+                    #If it is not a start or a stop, and we have started,
+                    #simply append.
+                    elif (asciiOrd != 60 and asciiOrd !=62 and start == True):
+                        temp.append(character.decode('ascii'))
+                    #If it is an end character, and we have started then we are done.
+                    elif (asciiOrd == 62 and start == True):
 
-                    #If there is something there, and it is a proper float
-                    if len(temp) > 0:
-                        try:
-                            converted = float(''.join(temp))
-                            ino2[i] = converted
-                            power = str(converted)
-                            saveReading(converted, q)
-                            #Acknowledge receipt of data
-                            ser.write('<5>'.encode('utf-8'))
-                        except Exception as e:
-                            print(e)
-                    start = False
-                    temp = []
+                        #If there is something there, and it is a proper float
+                        if len(temp) > 0:
+                            try:
+                                converted = float(''.join(temp))
+                                ino2[i] = converted
+                                power = str(converted)
+                                saveReading(converted, q)
+                                #Acknowledge receipt of data
+                                ser.write('<5>'.encode('utf-8'))
+                            except Exception as e:
+                                print(e)
+                        start = False
+                        temp = []
+                        break
 
             print(ino2)
 
@@ -174,41 +172,40 @@ def readFrom(q):
             #REMIND: send signal ready for 3
             #ser.write('<3>'.encode('utf-8')) #to be updated
 
-            while(ser.inWaiting() == 0):
-                pass
-            time.sleep(0.001)
-            while (ser.inWaiting() > 0):
-                character = ser.read()
-                asciiOrd = ord(character)
-                #If it is a start sequence and we have already started,
-                #start over.
-                if (asciiOrd == 60 and start == True):
-                    temp = []
-                #If it is a start sequence and we have not started,
-                #start now
-                elif (asciiOrd == 60 and start == False):
-                    start = True
+            while(True):
+                if(ser.inWaiting() > 0):
+                    character = ser.read()
+                    asciiOrd = ord(character)
+                    #If it is a start sequence and we have already started,
+                    #start over.
+                    if (asciiOrd == 60 and start == True):
+                        temp = []
+                    #If it is a start sequence and we have not started,
+                    #start now
+                    elif (asciiOrd == 60 and start == False):
+                        start = True
 
-                #If it is not a start or a stop, and we have started,
-                #simply append.
-                elif (asciiOrd != 60 and asciiOrd !=62 and start == True):
-                    temp.append(character.decode('ascii'))
-                #If it is an end character, and we have started then we are done.
-                elif (asciiOrd == 62 and start == True):
+                    #If it is not a start or a stop, and we have started,
+                    #simply append.
+                    elif (asciiOrd != 60 and asciiOrd !=62 and start == True):
+                        temp.append(character.decode('ascii'))
+                    #If it is an end character, and we have started then we are done.
+                    elif (asciiOrd == 62 and start == True):
 
-                    #If there is something there, and it is a proper float
-                    if len(temp) > 0:
-                        try:
-                            converted = float(''.join(temp))
-                            ino3[i] = converted
-                            power = str(converted)
-                            saveReading(converted, q)
-                            #Acknowledge receipt of data
-                            ser.write('<5>'.encode('utf-8'))
-                        except Exception as e:
-                            print(e)
-                    start = False
-                    temp = []
+                        #If there is something there, and it is a proper float
+                        if len(temp) > 0:
+                            try:
+                                converted = float(''.join(temp))
+                                ino3[i] = converted
+                                power = str(converted)
+                                saveReading(converted, q)
+                                #Acknowledge receipt of data
+                                ser.write('<5>'.encode('utf-8'))
+                            except Exception as e:
+                                print(e)
+                        start = False
+                        temp = []
+                        break
 
             print(ino3)
 
@@ -222,9 +219,9 @@ def readFrom(q):
         switch3 = sum(ino3)/len(ino3)
         print(switch3)
 
-        cur.execute("INSERT INTO plug1(collection_time,power_data) VALUES (CURRENT_TIMESTAMP(),double(switch1))")
-        cur.execute("INSERT INTO plug2(collection_time,power_data) VALUES (CURRENT_TIMESTAMP(),double(switch2))")
-        cur.execute("INSERT INTO plug3(collection_time,power_data) VALUES (CURRENT_TIMESTAMP(),double(switch3))")
+        cur.execute("INSERT INTO plug1(collection_time,power_data) VALUES (NOW(),double(switch1))")
+        cur.execute("INSERT INTO plug2(collection_time,power_data) VALUES (NOW(),double(switch2))")
+        cur.execute("INSERT INTO plug3(collection_time,power_data) VALUES (NOW(),double(switch3))")
 
 
 if __name__ == '__main__':
