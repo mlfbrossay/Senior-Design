@@ -210,7 +210,7 @@ def readFrom(q):
             print(ino3)
 
         print(ino1)
-        switch1 = float(sum(ino1)/len(ino1))
+        switch1 = sum(ino1)/len(ino1)
         print(switch1)
         print(ino2)
         switch2 = float(sum(ino2)/len(ino2))
@@ -219,7 +219,9 @@ def readFrom(q):
         switch3 = float(sum(ino3)/len(ino3))
         print(switch3)
 
-        cur.execute("INSERT INTO plug1 (collection_time,power_data) VALUES (%s, %s)", (NOW(), switch1))
+        #now = datetime.datetime
+
+        cur.execute("INSERT INTO plug1 (collection_time,power_data) VALUES (1,switch1)")
         cur.execute("INSERT INTO plug2 (collection_time,power_data) VALUES (NOW(),switch2)")
         cur.execute("INSERT INTO plug3 (collection_time,power_data) VALUES (NOW(),switch3)")
 
