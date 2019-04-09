@@ -11,6 +11,7 @@ const int receiverPin = 8; //Tells us we are receiving confirmation over Serial
 const int sendSwitch = 2;
 
 int flag = 0;
+char data[5] = "";
 
 const float FACTOR = 30; //CT Calibration factors
 const float multiplier = 0.0625F;
