@@ -219,9 +219,9 @@ def readFrom(q):
         switch3 = float(sum(ino3)/len(ino3))
         print(switch3)
 
-        cur.execute("INSERT INTO plug1(collection_time,power_data) VALUES (NOW(),switch1)")
-        cur.execute("INSERT INTO plug2(collection_time,power_data) VALUES (NOW(),switch2)")
-        cur.execute("INSERT INTO plug3(collection_time,power_data) VALUES (NOW(),switch3)")
+        cur.execute("INSERT INTO plug1 (collection_time,power_data) VALUES (NOW(),switch1)")
+        cur.execute("INSERT INTO plug2 (collection_time,power_data) VALUES (NOW(),switch2)")
+        cur.execute("INSERT INTO plug3 (collection_time,power_data) VALUES (NOW(),switch3)")
 
 
 if __name__ == '__main__':
