@@ -16,7 +16,6 @@ cnx= {'host': 'ammdb.clhkk5qyeyu2.us-east-1.rds.amazonaws.com',
 db = MySQLdb.connect(cnx['host'],cnx['username'],cnx['password'], cnx['db'])
 
 cur = db.cursor()
-db.autocommit = True
 
 q = queue.Queue()
 q.put("0.0")
@@ -227,6 +226,8 @@ def readFrom(q):
         cur.execute("INSERT INTO plug1 (collection_time,power_data) VALUES (%s,%s)", (formatted_date, switch1))
         cur.execute("INSERT INTO plug2 (collection_time,power_data) VALUES (%s,%s)", (formatted_date, switch2))
         cur.execute("INSERT INTO plug3 (collection_time,power_data) VALUES (%s,%s)", (formatted_date, switch3))
+
+        db.commit()
 
 
 if __name__ == '__main__':
