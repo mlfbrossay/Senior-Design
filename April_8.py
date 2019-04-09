@@ -6,7 +6,7 @@ from flask_ask import Ask, statement, question, session
 import datetime
 from threading import Thread
 import queue
-import MySQLdb
+import MySQLdb as sql
 import datetime
 
 cnx= {'host': 'ammdb.clhkk5qyeyu2.us-east-1.rds.amazonaws.com',
