@@ -7,6 +7,7 @@ from datetime import datetime
 from threading import Thread
 import queue
 import MySQLdb
+import random
 
 cnx= {'host': 'ammdb.clhkk5qyeyu2.us-east-1.rds.amazonaws.com',
   'username': 'amm',
