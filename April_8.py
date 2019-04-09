@@ -71,7 +71,6 @@ def turn_off_from_launch():
 
 @ask.intent("AskMostRecentOne")
 def mostRecentMinute1():
-
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 1) a")
     temp = cur.fetchone()
     recent_text = "Your plug one most recent power usage was " + str(temp) + " watts"
@@ -80,77 +79,88 @@ def mostRecentMinute1():
 
 @ask.intent("AskMostRecentTwo")
 def mostRecentMinute2():
-    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 1) a")
+    cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 1) a")
+    temp = cur.fetchone()    
     recent_text = "Your plug two most recent power usage was " + temp + " watts"
     print(recent_text)
     return statement(recent_text)
 
 @ask.intent("AskMostRecentThree")
 def mostRecentMinute3():
-    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 1) a")
+    cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 1) a")
+    temp = cur.fetchone()  
     recent_text = "Your plug three most recent power usage was " + temp + " watts"
     print(recent_text)
     return statement(recent_text)
 
 @ask.intent("AskThirtyAverageOne")
 def mostRecentHalfHour1():
-    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 30) a") 
+    cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 30) a")
+    temp = cur.fetchone()  
     recent_text = "In the last half hour plug one used " + temp + " watts"
     print(recent_text)
     return statement(recent_text)
 
 @ask.intent("AskThirtyAverageTwo")
 def mostRecentHalfHour2():
-    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 30) a") 
+    cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 30) a")
+    temp = cur.fetchone()  
     recent_text = "In the last half hour plug two used " + temp + " watts"
     print(recent_text)
     return statement(recent_text)
 
 @ask.intent("AskThirtyAverageThree")
 def mostRecentHalfHour3():
-    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 30) a") 
+    cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 30) a")
+    temp = cur.fetchone()  
     recent_text = "In the last half hour plug three used " + temp + " watts"
     print(recent_text)
     return statement(recent_text)
 
 @ask.intent("AskHourAverageOne")
 def mostRecentHour1():
-    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 60) a") 
+    cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 60) a")
+    temp = cur.fetchone()  
     recent_text = "In the last hour plug one used " + temp + " watts"
     print(recent_text)
     return statement(recent_text)
 
 @ask.intent("AskHourAverageTwo")
 def mostRecentHour2():
-    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 60) a") 
+    cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 60) a")
+    temp = cur.fetchone()  
     recent_text = "In the last hour plug two used " + temp + " watts"
     print(recent_text)
     return statement(recent_text)
 
 @ask.intent("AskHourAverageThree")
 def mostRecentHour3():
-    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 60) a") 
+    cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 60) a")
+    temp = cur.fetchone()  
     recent_text = "In the last hour plug three used " + temp + " watts"
     print(recent_text)
     return statement(recent_text)
 
 @ask.intent("AskDayAverageOne")
 def mostRecentDay1():
-    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 1440) a") 
+    cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 1440) a")
+    temp = cur.fetchone()  
     recent_text = "In the last day plug one used " + temp + " watts"
     print(recent_text)
     return statement(recent_text)
 
 @ask.intent("AskDayAverageTwo")
 def mostRecentDay2():
-    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 1440) a") 
+    cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 1440) a")
+    temp = cur.fetchone()  
     recent_text = "In the last day plug two used " + temp + " watts"
     print(recent_text)
     return statement(recent_text)
 
 @ask.intent("AskDayAverageThree")
 def mostRecentDay3():
-    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 1440) a") 
+    cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 1440) a")
+    temp = cur.fetchone()  
     recent_text = "In the last day plug three used " + temp + " watts"
     print(recent_text)
     return statement(recent_text)
