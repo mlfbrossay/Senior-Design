@@ -126,6 +126,8 @@ def readFrom(q):
                     start = False
                     temp = []
 
+            print(ino1)
+
             #REMIND: send signal ready for 2
             #ser.write('<2>'.encode('utf-8')) #to be updated
 
@@ -163,6 +165,8 @@ def readFrom(q):
                             print(e)
                     start = False
                     temp = []
+
+            print(ino2)
 
 
             #REMIND: send signal ready for 3
@@ -203,6 +207,8 @@ def readFrom(q):
                     start = False
                     temp = []
 
+            print(ino3)
+
         print(ino1)
         switch1 = sum(ino1)/len(ino1)
         print(switch1)
@@ -213,9 +219,9 @@ def readFrom(q):
         switch3 = sum(ino3)/len(ino3)
         print(switch3)
 
-        cur.execute("INSERT INTO plug1('collection_time','power_data') VALUES (CURRENT_TIMESTAMP(),switch1)")
-        cur.execute("INSERT INTO plug2('collection_time','power_data') VALUES (CURRENT_TIMESTAMP(),switch2)")
-        cur.execute("INSERT INTO plug3('collection_time','power_data') VALUES (CURRENT_TIMESTAMP(),switch3)")
+        cur.execute("INSERT INTO plug1(collection_time,power_data) VALUES (CURRENT_TIMESTAMP(),switch1)")
+        cur.execute("INSERT INTO plug2(collection_time,power_data) VALUES (CURRENT_TIMESTAMP(),switch2)")
+        cur.execute("INSERT INTO plug3(collection_time,power_data) VALUES (CURRENT_TIMESTAMP(),switch3)")
 
 
 if __name__ == '__main__':
