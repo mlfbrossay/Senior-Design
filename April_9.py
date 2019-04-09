@@ -228,6 +228,8 @@ def readFrom(q):
     ser1.flushInput()
     ser2.flushInput()
     while (True):
+        ser1.flushInput()
+        ser2.flushInput()
 
         for i in range(12):
             #REMIND: send signal ready for 1
