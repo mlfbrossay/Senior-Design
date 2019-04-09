@@ -21,6 +21,8 @@ cur.execute("DELETE FROM plug1")
 cur.execute("DELETE FROM plug2")
 cur.execute("DELETE FROM plug3")
 
+db.commit()
+
 q = queue.Queue()
 q.put("0.0")
 
