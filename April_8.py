@@ -17,6 +17,10 @@ db = MySQLdb.connect(cnx['host'],cnx['username'],cnx['password'], cnx['db'])
 
 cur = db.cursor()
 
+#cur.execute("DELETE FROM plug1")
+#cur.execute("DELETE FROM plug2")
+#cur.execute("DELETE FROM plug3")
+
 q = queue.Queue()
 q.put("0.0")
 
@@ -55,13 +59,15 @@ def turn_off_from_launch():
     off_text = "Okay, I've turned it off"
     return statement(off_text)  #Alexa says the above statement
 
-@ask.intent("AskPowerIntent")    #If the user says "Off," this will run
-def reportPower():
-    temp = q.get()
-    power_text = "Your current power usage is " + temp + " watts"
-    q.put(temp)
-    print(temp)
-    return statement(power_text)  #Alexa says the above statement
+
+#@ask.intent("AskPowerIntent")    #If the user says "Off," this will run
+#def reportPower():
+#    temp = q.get()
+#    power_text = "Your current power usage is " + temp + " watts"
+#    q.put(temp)
+#    print(temp)
+#    return statement(power_text)  #Alexa says the above statement
+
 
 @ask.intent("AskMostRecentOne")
 def mostRecentMinute1():
