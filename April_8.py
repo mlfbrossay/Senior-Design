@@ -30,7 +30,7 @@ ino3 = [0,0,0,0,0,0,0,0,0,0,0,0]
 app = Flask(__name__)
 ask = Ask(app, "/switch")
 
-print('------ ', datetime.datetime.now(), ' Program started')   #Will print when program initially runs
+print('------ ', datetime.now(), ' Program started')   #Will print when program initially runs
 
 print("Waiting for data...")
 
