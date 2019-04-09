@@ -3,7 +3,7 @@ import numpy as np
 import time
 from flask import Flask
 from flask_ask import Ask, statement, question, session
-import datetime
+from datetime import datetime
 from threading import Thread
 import queue
 import MySQLdb
