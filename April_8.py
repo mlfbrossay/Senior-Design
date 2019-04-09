@@ -221,7 +221,7 @@ def readFrom(q):
 
 
 
-        cur.execute("INSERT INTO plug1 (collection_time,power_data) VALUES (%s,%s)", (1, switch1))
+        cur.execute("INSERT INTO plug1 (collection_time,power_data) VALUES (%s,%s)", (1, 4))
         cur.execute("INSERT INTO plug2 (collection_time,power_data) VALUES (%s,%s)", (1, switch2))
         cur.execute("INSERT INTO plug3 (collection_time,power_data) VALUES (%s,%s)", (1, switch3))
 
