@@ -7,7 +7,6 @@ import datetime
 from threading import Thread
 import queue
 import MySQLdb
-import datetime
 
 cnx= {'host': 'ammdb.clhkk5qyeyu2.us-east-1.rds.amazonaws.com',
   'username': 'amm',
@@ -64,8 +63,15 @@ def reportPower():
     print(temp)
     return statement(power_text)  #Alexa says the above statement
 
-def saveReading(temperature, q):
-    power = str(temperature)
+@ask.intent("AskMostRecent")
+def mostRecentMinute():
+    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 1) a")
+    print("Your most recent power usage was " + temp + " watts")
+    recent_text = "Your most recent power usage was " + temp + " watts"
+    return statement(recent_text)
+
+def saveReading(temp, q):
+    power = str(temp)
     q.get()
     q.put(power)
     newReading = time.strftime("%Y-%m-%d %H:%M:%S") + \
@@ -207,6 +213,9 @@ def readFrom(q):
         switch3 = sum(ino3)/len(ino3)
         print(switch3)
 
+        cur.execute("INSERT INTO plug1('collection_time','power_data') VALUES (CURRENT_TIMESTAMP(),switch1)")
+        cur.execute("INSERT INTO plug2('collection_time','power_data') VALUES (CURRENT_TIMESTAMP(),switch2)")
+        cur.execute("INSERT INTO plug3('collection_time','power_data') VALUES (CURRENT_TIMESTAMP(),switch3)")
 
 
 if __name__ == '__main__':
