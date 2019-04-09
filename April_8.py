@@ -74,7 +74,8 @@ def readFrom(q):
             #REMIND: send signal ready for 1
 
             #Read one byte at a time
-            while(ser.inWaiting() == 0)
+            while(ser.inWaiting() == 0):
+                pass
             while (ser.inWaiting() > 0):
                 character = ser.read()
                 asciiOrd = ord(character)
@@ -111,7 +112,8 @@ def readFrom(q):
 
             #REMIND: send signal ready for 2
 
-            while(ser.inWaiting() == 0)
+            while(ser.inWaiting() == 0):
+                pass
             while (ser.inWaiting() > 0):
                 character = ser.read()
                 asciiOrd = ord(character)
@@ -149,7 +151,8 @@ def readFrom(q):
 
             #REMIND: send signal ready for 3
 
-            while(ser.inWaiting() == 0)
+            while(ser.inWaiting() == 0):
+                pass
             while (ser.inWaiting() > 0):
                 character = ser.read()
                 asciiOrd = ord(character)
