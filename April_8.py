@@ -74,6 +74,7 @@ def readFrom(q):
             #REMIND: send signal ready for 1
 
             #Read one byte at a time
+            while(ser.inWaiting() == 0)
             while (ser.inWaiting() > 0):
                 character = ser.read()
                 asciiOrd = ord(character)
@@ -110,7 +111,7 @@ def readFrom(q):
 
             #REMIND: send signal ready for 2
 
-
+            while(ser.inWaiting() == 0)
             while (ser.inWaiting() > 0):
                 character = ser.read()
                 asciiOrd = ord(character)
@@ -148,6 +149,7 @@ def readFrom(q):
 
             #REMIND: send signal ready for 3
 
+            while(ser.inWaiting() == 0)
             while (ser.inWaiting() > 0):
                 character = ser.read()
                 asciiOrd = ord(character)
@@ -182,10 +184,13 @@ def readFrom(q):
                     temp = []
             #ino3[i] = converted
 
+            print(ino1)
             switch1 = sum(ino1)/len(ino1)
             print(switch1)
+            print(ino2)
             switch2 = sum(ino2)/len(ino2)
             print(switch2)
+            print(ino3)
             switch3 = sum(ino3)/len(ino3)
             print(switch3)
 
