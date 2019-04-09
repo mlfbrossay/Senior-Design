@@ -71,7 +71,7 @@ def turn_off_from_launch():
 
 @ask.intent("AskMostRecentOne")
 def mostRecentMinute1():
-    temp = cur.execute("SELECT AVG(a.power_data) AS the_average FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC %s) a", 1)
+    temp = cur.execute("SELECT AVG(a.power_data) AS the_average FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC %s) a", (1,))
     recent_text = "Your plug one most recent power usage was " + temp + " watts"
     print(recent_text)
     return statement(recent_text)
