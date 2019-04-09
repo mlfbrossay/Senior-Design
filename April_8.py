@@ -6,6 +6,13 @@ from flask_ask import Ask, statement, question, session
 import datetime
 from threading import Thread
 import queue
+import MySQLdb
+import datetime
+
+cnx= {'host': 'ammdb.clhkk5qyeyu2.us-east-1.rds.amazonaws.com',
+  'username': 'amm',
+  'password': 'Aslani123!',
+  'db': 'sdamm'}
 
 q = queue.Queue()
 q.put("0.0")
@@ -63,7 +70,6 @@ def saveReading(temperature, q):
     with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
         file.write(newReading.encode('utf-8'))
 
-
 def readFrom(q):
     start = False
     temp = []
@@ -72,6 +78,7 @@ def readFrom(q):
 
         for i in range(12):
             #REMIND: send signal ready for 1
+            #ser.write('<1>'.encode('utf-8')) #to be updated
 
             #Read one byte at a time
             while(ser.inWaiting() == 0):
@@ -108,9 +115,9 @@ def readFrom(q):
                             print(e)
                     start = False
                     temp = []
-            #ino1[i] = converted
 
             #REMIND: send signal ready for 2
+            #ser.write('<2>'.encode('utf-8')) #to be updated
 
             while(ser.inWaiting() == 0):
                 pass
@@ -146,10 +153,10 @@ def readFrom(q):
                             print(e)
                     start = False
                     temp = []
-            #ino2[i] = converted
 
 
             #REMIND: send signal ready for 3
+            #ser.write('<3>'.encode('utf-8')) #to be updated
 
             while(ser.inWaiting() == 0):
                 pass
@@ -185,17 +192,16 @@ def readFrom(q):
                             print(e)
                     start = False
                     temp = []
-            #ino3[i] = converted
 
-            print(ino1)
-            switch1 = sum(ino1)/len(ino1)
-            print(switch1)
-            print(ino2)
-            switch2 = sum(ino2)/len(ino2)
-            print(switch2)
-            print(ino3)
-            switch3 = sum(ino3)/len(ino3)
-            print(switch3)
+        print(ino1)
+        switch1 = sum(ino1)/len(ino1)
+        print(switch1)
+        print(ino2)
+        switch2 = sum(ino2)/len(ino2)
+        print(switch2)
+        print(ino3)
+        switch3 = sum(ino3)/len(ino3)
+        print(switch3)
 
 
 
