@@ -48,14 +48,14 @@ def switch_off():   #Turns off switch
 @ask.intent("OnFromLaunchIntent")    #If the user says "Off," this will run
 def turn_on_from_launch():
     switch_on()            #function called to turn off switch
-    print(datetime.datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
+    print(datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
     on_text = "Okay, I've turned it on"
     return statement(on_text)  #Alexa says the above statement
 
 @ask.intent("OffFromLaunchIntent")    #If the user says "Off," this will run
 def turn_off_from_launch():
     switch_off()            #function called to turn off switch
-    print(datetime.datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
+    print(datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
     off_text = "Okay, I've turned it off"
     return statement(off_text)  #Alexa says the above statement
 
