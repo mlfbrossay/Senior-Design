@@ -227,7 +227,7 @@ def readFrom(q):
 
         for i in range(12):
             #REMIND: send signal ready for 1
-            #ser.write('<1-2>'.encode('utf-8')) #to be updated
+            ser.write('<1-2>'.encode('utf-8')) #to be updated
 
             #Read one byte at a time
             while(True):
