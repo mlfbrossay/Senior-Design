@@ -93,6 +93,7 @@ def readFrom(q):
             #Read one byte at a time
             while(ser.inWaiting() == 0):
                 pass
+            time.sleep(0.001)
             while (ser.inWaiting() > 0):
                 character = ser.read()
                 asciiOrd = ord(character)
@@ -133,6 +134,7 @@ def readFrom(q):
 
             while(ser.inWaiting() == 0):
                 pass
+            time.sleep()
             while (ser.inWaiting() > 0):
                 character = ser.read()
                 asciiOrd = ord(character)
@@ -219,9 +221,9 @@ def readFrom(q):
         switch3 = sum(ino3)/len(ino3)
         print(switch3)
 
-        cur.execute("INSERT INTO plug1(collection_time,power_data) VALUES (CURRENT_TIMESTAMP(),switch1)")
-        cur.execute("INSERT INTO plug2(collection_time,power_data) VALUES (CURRENT_TIMESTAMP(),switch2)")
-        cur.execute("INSERT INTO plug3(collection_time,power_data) VALUES (CURRENT_TIMESTAMP(),switch3)")
+        cur.execute("INSERT INTO plug1(collection_time,power_data) VALUES (CURRENT_TIMESTAMP(),double(switch1))")
+        cur.execute("INSERT INTO plug2(collection_time,power_data) VALUES (CURRENT_TIMESTAMP(),double(switch2))")
+        cur.execute("INSERT INTO plug3(collection_time,power_data) VALUES (CURRENT_TIMESTAMP(),double(switch3))")
 
 
 if __name__ == '__main__':
