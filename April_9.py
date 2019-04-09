@@ -71,42 +71,42 @@ def switch3_off():   #Turns off switch
 @ask.intent("OnFromLaunchIntentOne")    #If the user says "Off," this will run
 def turn_on1_from_launch():
     switch1_on()            #function called to turn off switch
-    print(datetime.datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
+    print(datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
     on_text = "Okay, I've turned it on"
     return statement(on_text)  #Alexa says the above statement
 
 @ask.intent("OffFromLaunchIntentOne")    #If the user says "Off," this will run
 def turn_off1_from_launch():
     switch1_off()            #function called to turn off switch
-    print(datetime.datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
+    print(datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
     off_text = "Okay, I've turned it off"
     return statement(off_text)  #Alexa says the above statement
 
 @ask.intent("OnFromLaunchIntentTwo")    #If the user says "Off," this will run
 def turn_on2_from_launch():
     switch2_on()            #function called to turn off switch
-    print(datetime.datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
+    print(datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
     on_text = "Okay, I've turned it on"
     return statement(on_text)  #Alexa says the above statement
 
 @ask.intent("OffFromLaunchIntentTwo")    #If the user says "Off," this will run
 def turn_off2_from_launch():
     switch2_off()            #function called to turn off switch
-    print(datetime.datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
+    print(datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
     off_text = "Okay, I've turned it off"
     return statement(off_text)  #Alexa says the above statement
 
 @ask.intent("OnFromLaunchIntentThree")    #If the user says "Off," this will run
 def turn_on3_from_launch():
     switch3_on()            #function called to turn off switch
-    print(datetime.datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
+    print(datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
     on_text = "Okay, I've turned it on"
     return statement(on_text)  #Alexa says the above statement
 
 @ask.intent("OffFromLaunchIntentThree")    #If the user says "Off," this will run
 def turn_off3_from_launch():
     switch3_off()            #function called to turn off switch
-    print(datetime.datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
+    print(datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
     off_text = "Okay, I've turned it off"
     return statement(off_text)  #Alexa says the above statement
 
