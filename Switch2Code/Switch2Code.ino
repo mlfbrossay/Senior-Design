@@ -4,13 +4,11 @@
 
 Adafruit_ADS1115 ads; //(0x48);
 
-SoftwareSerial btSerial(14, 16); // RX, TX
+SoftwareSerial btSerial(2, 3); // RX, TX
 
 const int senderPin = 7; //Tells us we are sending over Serial
 const int receiverPin = 8; //Tells us we are receiving confirmation over Serial
 const int sendSwitch = 2;
-
-int flag = 0;
 
 const float FACTOR = 30; //CT Calibration factors
 const float multiplier = 0.0625F;
@@ -19,18 +17,13 @@ float degreesC;
 unsigned long timer = 0;
 int sendStatus = 0;
 
-int buttonState;             // the current reading from the input pin
-int lastButtonState = LOW;   // the previous reading from the input pin
-unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
-unsigned long debounceDelay = 50;    // the debounce time; increase if the output flickers
-
 void setup() {
   //Pin Modes
   pinMode(senderPin, OUTPUT);
   pinMode(receiverPin, OUTPUT);
   pinMode(sendSwitch, INPUT_PULLUP);
-  pinMode(7, OUTPUT);
-  pinMode(6, INPUT_PULLUP);
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
 
   ads.setGain(GAIN_TWO); // +/- 2.048V 1 bit = 0.0624mV
   ads.begin();
@@ -41,9 +34,11 @@ void setup() {
   btSerial.flush();
   Serial.flush();
   delay(50);
-  digitalWrite(7, HIGH);
+  digitalWrite(9, HIGH);
+  digitalWrite(10, HIGH);
   delay(50);
-  digitalWrite(7, LOW);
+  digitalWrite(9, LOW);
+  digitalWrite(10, LOW);
 }
 
 void printMeasure(String prefix, float value, String postfix)
@@ -80,42 +75,19 @@ void loop() {
   }
   
   checkButton();
+ 
 
-  int reading = digitalRead(6);
-  if (reading != lastButtonState) {
-    // reset the debouncing timer
-    lastDebounceTime = millis();
-  }
-  if ((millis() - lastDebounceTime) > debounceDelay) {
-    if (reading != buttonState) {
-      buttonState = reading;
-
-      // only toggle the LED if the new button state is HIGH
-      if (buttonState == LOW) {
-        if(flag){
-          digitalWrite(7, LOW);
-          flag = 0;
-        }
-        else{
-          digitalWrite(7, HIGH);
-          flag = 1;
-        }
-      }
-    }
-  }
-  lastButtonState = reading;
   //Received message back from Raspberry.
   //RPI sends back messages in the form of <5>.
   //We only check for the numerical.
   while (btSerial.available()) {
+    //Numbers are between 48 and 57
     char rpiMessage = btSerial.read();
     if(rpiMessage == '1'){
-      digitalWrite(7, HIGH);
-      flag = 1;
+      digitalWrite(9, HIGH);
     }
     if(rpiMessage == '0'){
-      digitalWrite(7, LOW);
-      flag = 0;
+      digitalWrite(9, LOW);
     }
     Serial.println(rpiMessage); //Shows message from RPi
     
@@ -129,7 +101,7 @@ void checkButton() {
 }
 
 float getPower() {
-  float voltage;
+  /*float voltage;
   float current;
   float sum = 0;
   long Time = millis();
@@ -148,5 +120,7 @@ float getPower() {
   float power = 120 * currentRMS;
   
   return(power);
+  */
+  return 80;
 }
 
