@@ -73,7 +73,7 @@ def turn_off_from_launch():
 def mostRecentMinute1():
 
     temp = cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 1) a")
-    recent_text = "Your plug one most recent power usage was " + temp + " watts"
+    recent_text = "Your plug one most recent power usage was " + string(temp) + " watts"
     print(recent_text)
     return statement(recent_text)
 
