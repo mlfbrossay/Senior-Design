@@ -63,11 +63,88 @@ def reportPower():
     print(temp)
     return statement(power_text)  #Alexa says the above statement
 
-@ask.intent("AskMostRecent")
-def mostRecentMinute():
+@ask.intent("AskMostRecent1")
+def mostRecentMinute1():
     temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 1) a")
-    print("Your most recent power usage was " + temp + " watts")
     recent_text = "Your most recent power usage was " + temp + " watts"
+    print(recent_text)
+    return statement(recent_text)
+
+@ask.intent("AskMostRecent2")
+def mostRecentMinute2():
+    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 1) a")
+    recent_text = "Your most recent power usage was " + temp + " watts"
+    print(recent_text)
+    return statement(recent_text)
+
+@ask.intent("AskMostRecent3")
+def mostRecentMinute3():
+    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 1) a")
+    recent_text = "Your most recent power usage was " + temp + " watts"
+    print(recent_text)
+    return statement(recent_text)
+
+@ask.intent("AskThirtyAverage1")
+def mostRecentHalfHour1():
+    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 30) a") 
+    recent_text = "In the last half hour you used " + temp + " watts"
+    print(recent_text)
+    return statement(recent_text)
+
+@ask.intent("AskThirtyAverage2")
+def mostRecentHalfHour2():
+    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 30) a") 
+    recent_text = "In the last half hour you used " + temp + " watts"
+    print(recent_text)
+    return statement(recent_text)
+
+@ask.intent("AskThirtyAverage3")
+def mostRecentHalfHour3():
+    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 30) a") 
+    recent_text = "In the last half hour you used " + temp + " watts"
+    print(recent_text)
+    return statement(recent_text)
+
+@ask.intent("AskHourAverage1")
+def mostRecentHour1():
+    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 60) a") 
+    recent_text = "In the last hour you used " + temp + " watts"
+    print(recent_text)
+    return statement(recent_text)
+
+@ask.intent("AskHourAverage2")
+def mostRecentHour2():
+    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 60) a") 
+    recent_text = "In the last hour you used " + temp + " watts"
+    print(recent_text)
+    return statement(recent_text)
+
+@ask.intent("AskHourAverage3")
+def mostRecentHour3():
+    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 60) a") 
+    recent_text = "In the last hour you used " + temp + " watts"
+    print(recent_text)
+    return statement(recent_text)
+
+@ask.intent("AskDayAverage1")
+def mostRecentDay1():
+    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 1440) a") 
+    recent_text = "In the last day you used " + temp + " watts"
+    print(recent_text)
+    return statement(recent_text)
+
+@ask.intent("AskDayAverage2")
+def mostRecentDay2():
+    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 1440) a") 
+    recent_text = "In the last day you used " + temp + " watts"
+    print(recent_text)
+    return statement(recent_text)
+
+@ask.intent("AskDayAverage3")
+def mostRecentDay3():
+    temp = cur.execute("SELECT AVG(a.value) AS the_average FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 1440) a") 
+    recent_text = "In the last day you used " + temp + " watts"
+    print(recent_text)
     return statement(recent_text)
 
 def saveReading(temp, q):
