@@ -97,6 +97,7 @@ def readFrom(q):
                     if len(temp) > 0:
                         try:
                             converted = float(''.join(temp))
+                            ino1[i] = converted;
                             power = str(converted)
                             saveReading(converted, q)
                             #Acknowledge receipt of data
@@ -105,7 +106,7 @@ def readFrom(q):
                             print(e)
                     start = False
                     temp = []
-            ino1[i] = converted
+            #ino1[i] = converted
 
             #REMIND: send signal ready for 2
 
@@ -133,6 +134,7 @@ def readFrom(q):
                     if len(temp) > 0:
                         try:
                             converted = float(''.join(temp))
+                            ino2[i] = converted
                             power = str(converted)
                             saveReading(converted, q)
                             #Acknowledge receipt of data
@@ -141,7 +143,7 @@ def readFrom(q):
                             print(e)
                     start = False
                     temp = []
-            ino2[i] = converted
+            #ino2[i] = converted
 
 
             #REMIND: send signal ready for 3
@@ -169,6 +171,7 @@ def readFrom(q):
                     if len(temp) > 0:
                         try:
                             converted = float(''.join(temp))
+                            ino3[i] = converted
                             power = str(converted)
                             saveReading(converted, q)
                             #Acknowledge receipt of data
@@ -177,7 +180,7 @@ def readFrom(q):
                             print(e)
                     start = False
                     temp = []
-            ino3[i] = converted
+            #ino3[i] = converted
 
             switch1 = sum(ino1)/len(ino1)
             print(switch1)
