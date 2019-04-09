@@ -10,7 +10,9 @@ const int senderPin = 7; //Tells us we are sending over Serial
 const int receiverPin = 8; //Tells us we are receiving confirmation over Serial
 const int sendSwitch = 2;
 
+int count = 0;
 int flag = 0;
+int current_flag = 0;
 char data[5] = "";
 
 const float FACTOR = 30; //CT Calibration factors
@@ -61,9 +63,7 @@ void loop() {
   //I will only send a signal every 1 seconds.
   
   //Non-blocking every 10 seconds.
-  if ((timer == 0 || millis() >= timer) && sendStatus == 1){
-    
-    //Grab the current power usage in watts
+  if ((timer == 0 || millis() >= timer) && current_flag == 1){
     float power = getPower();
     printMeasure("Power: ", power, "W \n");  
     //Send the current power usage. Didn't use readline to avoid blocking problem
@@ -74,14 +74,13 @@ void loop() {
     sendPower.toCharArray(charArray, sendPower.length()+1);
     
     btSerial.write(charArray);
+    current_flag = 0;
     
     //Reset the timer for another 1 seconds.
     timer = millis() + 1000;
       
   }
-  
-  checkButton();
-
+//Debouncing
   int reading = digitalRead(6);
   if (reading != lastButtonState) {
     // reset the debouncing timer
@@ -90,8 +89,6 @@ void loop() {
   if ((millis() - lastDebounceTime) > debounceDelay) {
     if (reading != buttonState) {
       buttonState = reading;
-
-      // only toggle the LED if the new button state is HIGH
       if (buttonState == LOW) {
         if(flag){
           digitalWrite(7, LOW);
@@ -105,28 +102,40 @@ void loop() {
     }
   }
   lastButtonState = reading;
-  //Received message back from Raspberry.
-  //RPI sends back messages in the form of <5>.
-  //We only check for the numerical.
+
+//Bluetooth receive
   while (btSerial.available()) {
     char rpiMessage = btSerial.read();
-    if(rpiMessage == '1'){
-      digitalWrite(7, HIGH);
-      flag = 1;
+    if(rpiMessage == '<'){
+      count = 0;
+      for (int x = 0; x < sizeof(data) / sizeof(data[0]); x++)
+      {
+        data[x] = 0;
+      }
+      data[count] = rpiMessage;
     }
-    if(rpiMessage == '0'){
-      digitalWrite(7, LOW);
-      flag = 0;
+    else if(rpiMessage == '>'){
+      data[count] = rpiMessage;
+      if(data[1] == '1'){
+        if(data[3] == '1'){
+          digitalWrite(7, HIGH);
+          flag = 1;
+        }
+        else if(data[3] == '0'){
+          digitalWrite(7, LOW);
+          flag = 0;
+        }
+        else if(data[3] == '2'){
+          current_flag = 1;
+        }
+      } 
     }
-    Serial.println(rpiMessage); //Shows message from RPi
-    
+    else{
+      data[count] = rpiMessage;
+    }
+    count ++;
   }
     
-}
-
-//Checks to see if the user wants to keep sending messages.
-void checkButton() {
-  sendStatus = 1;
 }
 
 float getPower() {
@@ -148,6 +157,7 @@ float getPower() {
   float currentRMS = current;
   float power = 120 * currentRMS;
   
-  return(power);
+  //return(power);
+  return 10;
 }
 

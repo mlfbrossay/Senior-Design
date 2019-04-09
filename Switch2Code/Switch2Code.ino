@@ -25,8 +25,11 @@ unsigned long timer2 = 0;
 unsigned long timer3 = 0;
 
 int buttonState;             // the current reading from the input pin
+int buttonState1;             // the current reading from the input pin
 int lastButtonState = LOW;   // the previous reading from the input pin
+int lastButtonState1 = LOW;   // the previous reading from the input pin
 unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
+unsigned long lastDebounceTime1 = 0;  // the last time the output pin was toggled
 unsigned long debounceDelay = 50;    // the debounce time; increase if the output flickers
 
 void setup() {
@@ -37,6 +40,7 @@ void setup() {
   pinMode(9, OUTPUT);
   pinMode(10, OUTPUT);
   pinMode(6, INPUT_PULLUP);
+  pinMode(7, INPUT_PULLUP);
 
   ads.setGain(GAIN_TWO); // +/- 2.048V 1 bit = 0.0624mV
   ads.begin();
@@ -61,6 +65,7 @@ void loop() {
     char charArray2[sendPower2.length() + 1]; //Convert to byte array
     sendPower2.toCharArray(charArray2, sendPower2.length()+1);
     btSerial.write(charArray2);
+    current_flag_2 = 0;
     //Reset the timer for another 1 seconds.
     timer2 = millis() + 1000;
       
@@ -71,6 +76,7 @@ void loop() {
     char charArray3[sendPower3.length() + 1]; //Convert to byte array
     sendPower3.toCharArray(charArray3, sendPower3.length()+1);
     btSerial.write(charArray3);
+    current_flag_3 = 0;
     //Reset the timer for another 1 seconds.
     timer3 = millis() + 1000;
       
@@ -98,32 +104,33 @@ void loop() {
       }
     }
   }
-  int reading = digitalRead(6);
-  if (reading != lastButtonState) {
+  int reading1 = digitalRead(7);
+  if (reading1 != lastButtonState1) {
     // reset the debouncing timer
-    lastDebounceTime = millis();
+    lastDebounceTime1 = millis();
   }
-  if ((millis() - lastDebounceTime) > debounceDelay) {
-    if (reading != buttonState) {
-      buttonState = reading;
-
-      // only toggle the LED if the new button state is HIGH
-      if (buttonState == LOW) {
-        if(flag2){
-          digitalWrite(9, LOW);
-          flag2 = 0;
+  if ((millis() - lastDebounceTime1) > debounceDelay) {
+    if (reading != buttonState1) {
+      buttonState1 = reading1;
+      if (buttonState1 == LOW) {
+        if(flag3){
+          digitalWrite(10, LOW);
+          flag3 = 0;
         }
         else{
-          digitalWrite(9, HIGH);
-          flag2 = 1;
+          digitalWrite(10, HIGH);
+          flag3 = 1;
         }
       }
     }
   }
   lastButtonState = reading;
+  lastButtonState1 = reading1;
+  
 //Bluetooth receive
   while (btSerial.available()) {
     char rpiMessage = btSerial.read();
+    Serial.print(rpiMessage);
     if(rpiMessage == '<'){
       count = 0;
       for (int x = 0; x < sizeof(data) / sizeof(data[0]); x++)
