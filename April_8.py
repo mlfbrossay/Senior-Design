@@ -14,6 +14,10 @@ cnx= {'host': 'ammdb.clhkk5qyeyu2.us-east-1.rds.amazonaws.com',
   'password': 'Aslani123!',
   'db': 'sdamm'}
 
+db = MySQLdb.connect(cnx['host'],cnx['username'],cnx['password'], cnx['db'])
+
+cur = db.cursor()
+
 q = queue.Queue()
 q.put("0.0")
 
