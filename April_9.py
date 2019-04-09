@@ -39,35 +39,6 @@ print('------ ', datetime.now(), ' Program started')   #Will print when program 
 
 print("Waiting for data...")
 
-
-#will be deletable soon
-def switch_on():    #Turns on switch
-    print('switch has turned on')
-    ser.write('<1>'.encode('utf-8'))
-
-def switch_off():   #Turns off switch
-    print('switch has turned off')
-    ser.write('<0>'.encode('utf-8'))
-
-
-@ask.intent("OnFromLaunchIntent")    #If the user says "Off," this will run
-def turn_on_from_launch():
-    switch_on()            #function called to turn off switch
-    print(datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
-    on_text = "Okay, I've turned it on"
-    return statement(on_text)  #Alexa says the above statement
-
-@ask.intent("OffFromLaunchIntent")    #If the user says "Off," this will run
-def turn_off_from_launch():
-    switch_off()            #function called to turn off switch
-    print(datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
-    off_text = "Okay, I've turned it off"
-    return statement(off_text)  #Alexa says the above statement
-### to here
-
-
-
-
 # Change these functions to accommodate each of the 3 switches
 # Sends the switch number, then a '-', then a '1' for high or a '0' for low
 def switch1_on():    #Turns on switch
@@ -137,8 +108,6 @@ def turn_off3_from_launch():
     print(datetime.datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
     off_text = "Okay, I've turned it off"
     return statement(off_text)  #Alexa says the above statement
-
-
 
 
 
@@ -257,7 +226,7 @@ def readFrom(q):
 
         for i in range(12):
             #REMIND: send signal ready for 1
-            #ser.write('<1>'.encode('utf-8')) #to be updated
+            #ser.write('<1-2>'.encode('utf-8')) #to be updated
 
             #Read one byte at a time
             while(True):
@@ -298,7 +267,7 @@ def readFrom(q):
             print(ino1)
 
             #REMIND: send signal ready for 2
-            #ser.write('<2>'.encode('utf-8')) #to be updated
+            #ser.write('<2-2>'.encode('utf-8')) #to be updated
 
             while(True):
                 if(ser.inWaiting() > 0):
@@ -339,7 +308,7 @@ def readFrom(q):
 
 
             #REMIND: send signal ready for 3
-            #ser.write('<3>'.encode('utf-8')) #to be updated
+            #ser.write('<3-2>'.encode('utf-8')) #to be updated
 
             while(True):
                 if(ser.inWaiting() > 0):
@@ -378,14 +347,20 @@ def readFrom(q):
 
             print(ino3)
 
-        print(ino1)
-        switch1 = sum(ino1)/len(ino1)
+
+        #temp
+        switch1 = random.random()*100
+        switch2 = random.random()*50
+        switch3 = random.random()*25
+
+        #print(ino1)
+        #switch1 = sum(ino1)/len(ino1)
         print(switch1)
-        print(ino2)
-        switch2 = float(sum(ino2)/len(ino2))
+        #print(ino2)
+        #switch2 = float(sum(ino2)/len(ino2))
         print(switch2)
-        print(ino3)
-        switch3 = float(sum(ino3)/len(ino3))
+        #print(ino3)
+        #switch3 = float(sum(ino3)/len(ino3))
         print(switch3)
 
 

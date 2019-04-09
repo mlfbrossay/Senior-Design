@@ -299,14 +299,19 @@ def readFrom(q):
 
             print(ino3)
 
-        print(ino1)
-        switch1 = sum(ino1)/len(ino1)
+        #temp
+        switch1 = random.random()*100
+        switch2 = random.random()*50
+        switch3 = random.random()*25
+
+        #print(ino1)
+        #switch1 = sum(ino1)/len(ino1)
         print(switch1)
-        print(ino2)
-        switch2 = float(sum(ino2)/len(ino2))
+        #print(ino2)
+        #switch2 = float(sum(ino2)/len(ino2))
         print(switch2)
-        print(ino3)
-        switch3 = float(sum(ino3)/len(ino3))
+        #print(ino3)
+        #switch3 = float(sum(ino3)/len(ino3))
         print(switch3)
 
 
