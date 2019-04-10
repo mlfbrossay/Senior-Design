@@ -43,79 +43,78 @@ print('------ ', datetime.now(), ' Program started')   #Will print when program 
 
 print("Waiting for data...")
 
-# Change these functions to accommodate each of the 3 switches
 # Sends the switch number, then a '-', then a '1' for high or a '0' for low
-def switch1_on():    #Turns on switch
+def switch1_on():    #Turns on switch 1
     print('switch 1 has turned on')
     ser1.write('<1-1>'.encode('utf-8'))
 
-def switch1_off():   #Turns off switch
+def switch1_off():   #Turns off switch 1
     print('switch 1 has turned off')
     ser1.write('<1-0>'.encode('utf-8'))
 
-def switch2_on():    #Turns on switch
+def switch2_on():    #Turns on switch 2
     print('switch 2 has turned on')
     ser2.write('<2-1>'.encode('utf-8'))
 
-def switch2_off():   #Turns off switch
+def switch2_off():   #Turns off switch 2
     print('switch 2 has turned off')
     ser2.write('<2-0>'.encode('utf-8'))
 
-def switch3_on():    #Turns on switch
+def switch3_on():    #Turns on switch 3
     print('switch 3 has turned on')
     ser2.write('<3-1>'.encode('utf-8'))
 
-def switch3_off():   #Turns off switch
+def switch3_off():   #Turns off switch 3
     print('switch 3 has turned off')
     ser2.write('<3-0>'.encode('utf-8'))
 
 
 # Added intents for all 3 switches
-@ask.intent("OnFromLaunchIntentOne")    #If the user says "Off," this will run
+@ask.intent("OnFromLaunchIntentOne")  
 def turn_on1_from_launch():
     switch1_on()            #function called to turn off switch
     print(datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
     on_text = "Okay, I've turned it on"
-    return statement(on_text)  #Alexa says the above statement
+    return statement(on_text) 
 
-@ask.intent("OffFromLaunchIntentOne")    #If the user says "Off," this will run
+@ask.intent("OffFromLaunchIntentOne")  
 def turn_off1_from_launch():
     switch1_off()            #function called to turn off switch
     print(datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
     off_text = "Okay, I've turned it off"
-    return statement(off_text)  #Alexa says the above statement
+    return statement(off_text) 
 
-@ask.intent("OnFromLaunchIntentTwo")    #If the user says "Off," this will run
+@ask.intent("OnFromLaunchIntentTwo") 
 def turn_on2_from_launch():
     switch2_on()            #function called to turn off switch
     print(datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
     on_text = "Okay, I've turned it on"
-    return statement(on_text)  #Alexa says the above statement
+    return statement(on_text) 
 
-@ask.intent("OffFromLaunchIntentTwo")    #If the user says "Off," this will run
+@ask.intent("OffFromLaunchIntentTwo")  
 def turn_off2_from_launch():
     switch2_off()            #function called to turn off switch
     print(datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
     off_text = "Okay, I've turned it off"
-    return statement(off_text)  #Alexa says the above statement
+    return statement(off_text) 
 
-@ask.intent("OnFromLaunchIntentThree")    #If the user says "Off," this will run
+@ask.intent("OnFromLaunchIntentThree") 
 def turn_on3_from_launch():
     switch3_on()            #function called to turn off switch
     print(datetime.now(), " Switch turned on") #Tells user what has happened at current date/time
     on_text = "Okay, I've turned it on"
-    return statement(on_text)  #Alexa says the above statement
+    return statement(on_text) 
 
-@ask.intent("OffFromLaunchIntentThree")    #If the user says "Off," this will run
+@ask.intent("OffFromLaunchIntentThree")  
 def turn_off3_from_launch():
     switch3_off()            #function called to turn off switch
     print(datetime.now(), " Switch turned off") #Tells user what has happened at current date/time
     off_text = "Okay, I've turned it off"
-    return statement(off_text)  #Alexa says the above statement
+    return statement(off_text) 
 
 
 
-
+#intents for all types of power
 @ask.intent("AskMostRecentOne")
 def mostRecentMinute1():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 1) a")
@@ -212,6 +211,9 @@ def mostRecentDay3():
     print(recent_text)
     return statement(recent_text)
 
+
+
+
 def saveReading(temp, q):
     power = str(temp)
     q.get()
@@ -232,8 +234,8 @@ def readFrom(q):
         ser2.flushInput()
 
         for i in range(12):
-            #REMIND: send signal ready for 1
-            ser1.write('<1-2>'.encode('utf-8')) #to be updated
+            #send signal ready for 1
+            ser1.write('<1-2>'.encode('utf-8'))
 
             #Read one byte at a time
             while(True):
@@ -271,7 +273,7 @@ def readFrom(q):
                         temp = []
                         break
 
-            #REMIND: send signal ready for 2
+            #send signal ready for 2
             ser2.write('<2-2>'.encode('utf-8')) #to be updated
 
             while(True):
@@ -311,7 +313,7 @@ def readFrom(q):
 
 
 
-            #REMIND: send signal ready for 3
+            #send signal ready for 3
             ser2.write('<3-2>'.encode('utf-8')) #to be updated
 
             while(True):
