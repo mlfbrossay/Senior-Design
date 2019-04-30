@@ -119,7 +119,7 @@ def turn_off3_from_launch():
 def mostRecentMinute1():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 1) a")
     temp = cur.fetchone()
-    recent_text = "Your plug one most recent power usage was " + str(temp) + " watts"
+    recent_text = "Your plug one most recent power usage was %.2f watts" % temp
     print(recent_text)
     return statement(recent_text)
 
@@ -127,7 +127,7 @@ def mostRecentMinute1():
 def mostRecentMinute2():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 1) a")
     temp = cur.fetchone()    
-    recent_text = "Your plug two most recent power usage was " + str(temp) + " watts"
+    recent_text = "Your plug two most recent power usage was %.2f watts" % temp
     print(recent_text)
     return statement(recent_text)
 
@@ -135,7 +135,7 @@ def mostRecentMinute2():
 def mostRecentMinute3():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 1) a")
     temp = cur.fetchone()  
-    recent_text = "Your plug three most recent power usage was " + str(temp) + " watts"
+    recent_text = "Your plug three most recent power usage was %.2f watts" % temp
     print(recent_text)
     return statement(recent_text)
 
@@ -143,7 +143,7 @@ def mostRecentMinute3():
 def mostRecentHalfHour1():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 30) a")
     temp = cur.fetchone()  
-    recent_text = "In the last half hour plug one used " + str(temp) + " watts"
+    recent_text = "In the last half hour plug one used %.2f watts" % temp
     print(recent_text)
     return statement(recent_text)
 
@@ -151,7 +151,7 @@ def mostRecentHalfHour1():
 def mostRecentHalfHour2():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 30) a")
     temp = cur.fetchone()  
-    recent_text = "In the last half hour plug two used " + str(temp) + " watts"
+    recent_text = "In the last half hour plug two used %.2f watts" % temp
     print(recent_text)
     return statement(recent_text)
 
@@ -159,7 +159,7 @@ def mostRecentHalfHour2():
 def mostRecentHalfHour3():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 30) a")
     temp = cur.fetchone()  
-    recent_text = "In the last half hour plug three used " + str(temp) + " watts"
+    recent_text = "In the last half hour plug three used %.2f watts" % temp
     print(recent_text)
     return statement(recent_text)
 
@@ -167,7 +167,7 @@ def mostRecentHalfHour3():
 def mostRecentHour1():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 60) a")
     temp = cur.fetchone()  
-    recent_text = "In the last hour plug one used " + str(temp) + " watts"
+    recent_text = "In the last hour plug one used %.2f watts" % temp
     print(recent_text)
     return statement(recent_text)
 
@@ -175,7 +175,7 @@ def mostRecentHour1():
 def mostRecentHour2():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 60) a")
     temp = cur.fetchone()  
-    recent_text = "In the last hour plug two used " + str(temp) + " watts"
+    recent_text = "In the last hour plug two used %.2f watts" % temp
     print(recent_text)
     return statement(recent_text)
 
@@ -183,7 +183,7 @@ def mostRecentHour2():
 def mostRecentHour3():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 60) a")
     temp = cur.fetchone()  
-    recent_text = "In the last hour plug three used " + str(temp) + " watts"
+    recent_text = "In the last hour plug three used %.2f watts" % temp
     print(recent_text)
     return statement(recent_text)
 
@@ -191,7 +191,7 @@ def mostRecentHour3():
 def mostRecentDay1():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug1 ORDER BY collection_time DESC LIMIT 1440) a")
     temp = cur.fetchone()  
-    recent_text = "In the last day plug one used " + str(temp) + " watts"
+    recent_text = "In the last day plug one used %.2f watts" % temp
     print(recent_text)
     return statement(recent_text)
 
@@ -199,7 +199,7 @@ def mostRecentDay1():
 def mostRecentDay2():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug2 ORDER BY collection_time DESC LIMIT 1440) a")
     temp = cur.fetchone()  
-    recent_text = "In the last day plug two used " + str(temp) + " watts"
+    recent_text = "In the last day plug two used %.2f watts" % temp
     print(recent_text)
     return statement(recent_text)
 
@@ -207,7 +207,7 @@ def mostRecentDay2():
 def mostRecentDay3():
     cur.execute("SELECT AVG(a.power_data) FROM (SELECT power_data FROM plug3 ORDER BY collection_time DESC LIMIT 1440) a")
     temp = cur.fetchone()  
-    recent_text = "In the last day plug three used " + str(temp) + " watts"
+    recent_text = "In the last day plug three used %.2f watts" % temp
     print(recent_text)
     return statement(recent_text)
 
