@@ -221,7 +221,7 @@ def saveReading(temp, q):
     newReading = time.strftime("%Y-%m-%d %H:%M:%S") + \
                  ',' + power + '\n'
     print('Saving new reading: ' + newReading)
-    with open('/home/pi/Desktop/temperatureReadings.csv', 'ab') as file:
+    with open('/home/pi/Desktop/powerReadings.csv', 'ab') as file:
         file.write(newReading.encode('utf-8'))
 
 def readFrom(q):
