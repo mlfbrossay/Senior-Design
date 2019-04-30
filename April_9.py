@@ -30,8 +30,6 @@ q.put("0.0")
 ser1 = serial.Serial('/dev/rfcomm0', 9600)
 ser2 = serial.Serial('/dev/rfcomm1', 9600)
 
-print("it paired")
-
 ino1 = [0,0,0,0,0,0,0,0,0,0,0,0]
 ino2 = [0,0,0,0,0,0,0,0,0,0,0,0]
 ino3 = [0,0,0,0,0,0,0,0,0,0,0,0]
