@@ -15,7 +15,7 @@ int flag = 0;
 int current_flag = 0;
 char data[5] = "";
 
-const float FACTOR = 30; //CT Calibration factors
+const float FACTOR = 16.5; //CT Calibration factors
 const float multiplier = 0.0625F;
 
 float degreesC;
@@ -57,7 +57,6 @@ void printMeasure(String prefix, float value, String postfix)
 }
 
 void loop() {
-  
   //I want to send the current, I want the Raspberry PI to grab it, process it
   //and send back a message. I don't want to continue spamming the raspberry pi, so
   //I will only send a signal every 1 seconds.
@@ -156,8 +155,6 @@ float getPower() {
   current = sqrt(sum/counter); //avg
   float currentRMS = current;
   float power = 120 * currentRMS;
-  
-  //return(power);
-  return 10;
+  return(power);
 }
 

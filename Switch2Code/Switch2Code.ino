@@ -17,7 +17,8 @@ int current_flag_2 = 0;
 int current_flag_3 = 0;
 char data[5] = {};
 
-const float FACTOR = 30; //CT Calibration factors
+const float FACTOR = 17.3; //CT Calibration factors
+const float FACTOR2 = 16.5;
 const float multiplier = 0.0625F;
 
 float degreesC;
@@ -37,8 +38,8 @@ void setup() {
   pinMode(senderPin, OUTPUT);
   pinMode(receiverPin, OUTPUT);
   pinMode(sendSwitch, INPUT_PULLUP);
+  pinMode(8, OUTPUT);
   pinMode(9, OUTPUT);
-  pinMode(10, OUTPUT);
   pinMode(6, INPUT_PULLUP);
   pinMode(7, INPUT_PULLUP);
 
@@ -51,11 +52,11 @@ void setup() {
   btSerial.flush();
   Serial.flush();
   delay(50);
+  digitalWrite(8, HIGH);
   digitalWrite(9, HIGH);
-  digitalWrite(10, HIGH);
   delay(50);
+  digitalWrite(8, LOW);
   digitalWrite(9, LOW);
-  digitalWrite(10, LOW);
 }
 
 void loop() {
@@ -81,6 +82,7 @@ void loop() {
     timer3 = millis() + 1000;
       
   }
+  
 //Debouncing
   int reading = digitalRead(6);
   if (reading != lastButtonState) {
@@ -94,11 +96,11 @@ void loop() {
       // only toggle the LED if the new button state is HIGH
       if (buttonState == LOW) {
         if(flag2){
-          digitalWrite(9, LOW);
+          digitalWrite(8, LOW);
           flag2 = 0;
         }
         else{
-          digitalWrite(9, HIGH);
+          digitalWrite(8, HIGH);
           flag2 = 1;
         }
       }
@@ -110,15 +112,15 @@ void loop() {
     lastDebounceTime1 = millis();
   }
   if ((millis() - lastDebounceTime1) > debounceDelay) {
-    if (reading != buttonState1) {
+    if (reading1 != buttonState1) {
       buttonState1 = reading1;
       if (buttonState1 == LOW) {
         if(flag3){
-          digitalWrite(10, LOW);
+          digitalWrite(9, LOW);
           flag3 = 0;
         }
         else{
-          digitalWrite(10, HIGH);
+          digitalWrite(9, HIGH);
           flag3 = 1;
         }
       }
@@ -143,11 +145,11 @@ void loop() {
       data[count] = rpiMessage;
       if(data[1] == '2'){
         if(data[3] == '1'){
-          digitalWrite(9, HIGH);
+          digitalWrite(8, HIGH);
           flag2 = 1;
         }
         else if(data[3] == '0'){
-          digitalWrite(9, LOW);
+          digitalWrite(8, LOW);
           flag2 = 0;
         }
         else if(data[3] == '2'){
@@ -156,11 +158,11 @@ void loop() {
       }
       if(data[1] == '3'){
         if(data[3] == '1'){
-          digitalWrite(10, HIGH);
+          digitalWrite(9, HIGH);
           flag3 = 1;
         }
         else if(data[3] == '0'){
-          digitalWrite(10, LOW);
+          digitalWrite(9, LOW);
           flag3 = 0;
         }
         else if(data[3] == '2'){
@@ -177,7 +179,24 @@ void loop() {
 }
 
 float getPower2(){
-  return 60;
+  float voltage;
+  float current;
+  float sum = 0;
+  long Time = millis();
+  int counter = 0;
+
+  while(millis() - Time < 1000){
+    voltage = ads.readADC_Differential_0_1() * multiplier;
+    current = voltage * FACTOR2; //Conductance
+    current /= 1000.0;
+
+    sum += sq(current);
+    counter = counter + 1;
+  }
+  current = sqrt(sum/counter); //avg
+  float currentRMS = current;
+  float power = 120 * currentRMS;
+  return(power);
 }
 
 float getPower3() {
@@ -188,7 +207,7 @@ float getPower3() {
   int counter = 0;
 
   while(millis() - Time < 1000){
-    voltage = ads.readADC_Differential_0_1() * multiplier;
+    voltage = ads.readADC_Differential_2_3() * multiplier;
     current = voltage * FACTOR; //Conductance
     current /= 1000.0;
 
@@ -198,7 +217,6 @@ float getPower3() {
   current = sqrt(sum/counter); //avg
   float currentRMS = current;
   float power = 120 * currentRMS;
-  
   return(power);
 }
 
